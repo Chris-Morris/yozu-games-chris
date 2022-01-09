@@ -1,9 +1,9 @@
-import { configureStore } from 'redux-toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
 import HomeScreenSlice from './screens/Home/HomeScreenSlice';
 
 export const store = configureStore({
     reducer: {
-        HomeScreenSlice
+        Home: HomeScreenSlice
     }
 })
