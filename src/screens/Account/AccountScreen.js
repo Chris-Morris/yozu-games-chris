@@ -1,16 +1,29 @@
 import React, { useContext } from 'react';
-import { View, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { AuthContext } from '../../context/authContext';
 
 const AccountScreen = () => {
-    const { signOut } = usecontext(AuthContext);
+    const { signOut } = useContext(AuthContext);
 
     return (
-        <View>
-            <Button title="Sign Out" onPress={() => signOut()} />
+        <View style={styles.container}>
+
+            <TouchableOpacity onPress={() => signOut()}><Text style={styles.signout} >Sign Out</Text></TouchableOpacity>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'rgb(228, 70, 67)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    signout: {
+        color: 'white'
+    }
+});
 
 export default AccountScreen

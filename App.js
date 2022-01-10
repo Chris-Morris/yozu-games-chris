@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer, useMemo } from 'react';
+import React, { useReducer, useMemo, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -29,7 +29,7 @@ function GameScreen() {
   return (
     <GameStack.Navigator>
       <GameStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-      <GameStack.Screen name="PlayScreen" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher/Lower', headerTransparent: true }} />
+      <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher/Lower', headerTransparent: true }} />
     </GameStack.Navigator>
   );
 }
@@ -82,11 +82,11 @@ export default () => {
   }, []);
 
   const authContext = useMemo(() => ({
-    signIn: async data => {
+    signIn: async () => {
       dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
     },
     signOut: () => dispatch({ type: 'SIGN_OUT' }),
-    signUp: async data => {
+    signUp: async () => {
       dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
     }
   }), []);
@@ -99,7 +99,7 @@ export default () => {
             <Tab.Navigator screenOptions={{
               headerShown: false
             }}>
-              <Tab.Screen name="Game" component={GameScreen} options={{
+              <Tab.Screen name="Play" component={GameScreen} options={{
                 tabBarLabel: 'Play',
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="list" color={color} size={size} />

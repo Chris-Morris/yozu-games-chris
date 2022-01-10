@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import { selectGreeting, changeGreeting } from './HomeScreenSlice';
+import { changeGreeting } from './HomeScreenSlice';
 
 // Import Components
 import Stats from '../../components/Stats';
@@ -11,7 +11,7 @@ import Card from '../../components/Card';
 const HomeScreen = ({ navigation }) => {
     const [greeting, setGreeting] = useState('');
     const dispatch = useDispatch();
-    const selectedGreeting = useSelector(state => state.Play.greeting);
+    const selectedGreeting = useSelector(state => state.Home.greeting);
 
     const handlePress = () => {
         dispatch(changeGreeting(greeting))
@@ -22,6 +22,8 @@ const HomeScreen = ({ navigation }) => {
             <Stats style={styles.stats} />
             <Divider />
             <Card number={selectedGreeting} />
+            <TextInput style={{ height: 20, width: 200, backgroundColor: 'white' }} value={greeting} onChangeText={setGreeting} />
+            <Button title="Say Hello" onPress={handlePress} />
             <Button title="Play!" onPress={() => navigation.navigate('Play')} />
         </View>
     )

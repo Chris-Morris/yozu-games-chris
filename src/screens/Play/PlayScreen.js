@@ -12,7 +12,7 @@ import ButtonContainer from '../../components/ButtonContainer';
 const PlayScreen = ({ navigation }) => {
     const [greeting, setGreeting] = useState('');
     const dispatch = useDispatch();
-    const selectedGreeting = useSelector(state => state.Play.greeting);
+    const selectedGreeting = useSelector(state => state.Home.greeting);
 
     const handlePress = () => {
         dispatch(changeGreeting(greeting))
@@ -22,7 +22,7 @@ const PlayScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Stats style={styles.stats} />
             <Divider />
-            <Card number="hello?" />
+            <Card number={selectedGreeting} />
             <ButtonContainer />
         </View>
     )
