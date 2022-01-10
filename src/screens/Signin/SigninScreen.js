@@ -1,32 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { selectGreeting, changeGreeting } from './SigninScreenSlice';
 
 // Import Components
-import Stats from '../../components/Stats';
-import Divider from '../../components/Divider';
-import Card from '../../components/Card';
-import ButtonContainer from '../../components/ButtonContainer';
+import { AuthContext } from '../../context/authContext';
 
 const SigninScreen = ({ navigation }) => {
     const [greeting, setGreeting] = useState('');
     const dispatch = useDispatch();
     const selectedGreeting = useSelector(state => state.Play.greeting);
+    const { signIn } = useContext(AuthContext);
 
     const handlePress = () => {
         dispatch(changeGreeting(greeting))
     }
 
-    const signinAsync = async () => {
-        await AsyncStorage.setItem('userToken', 'abc');
-        navigation.navigate('mainFlow');
-    }
-
     return (
         <View style={styles.container}>
-            <Button title="Please Sign In!" onPress={signinAsync} />
+            <Button title="Please Sign In!" onPress={() => signIn()} />
         </View>
     )
 }

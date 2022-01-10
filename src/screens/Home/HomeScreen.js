@@ -7,7 +7,6 @@ import { selectGreeting, changeGreeting } from './HomeScreenSlice';
 import Stats from '../../components/Stats';
 import Divider from '../../components/Divider';
 import Card from '../../components/Card';
-import ButtonContainer from '../../components/ButtonContainer';
 
 const HomeScreen = ({ navigation }) => {
     const [greeting, setGreeting] = useState('');
@@ -24,7 +23,6 @@ const HomeScreen = ({ navigation }) => {
             <Divider />
             <Card number={selectedGreeting} />
             <Button title="Play!" onPress={() => navigation.navigate('Play')} />
-            <ButtonContainer />
         </View>
     )
 }

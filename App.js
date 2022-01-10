@@ -1,7 +1,11 @@
-import * as React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import React, { useState, useContext, useReducer, useMemo } from 'react';
+import * as SecureStore from 'expo-secure-store';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+// Import Navigation libs
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Import Screens
 import SignupScreen from './src/screens/Signup/SignupScreen';
@@ -10,30 +14,124 @@ import HomeScreen from './src/screens/Home/HomeScreen';
 import PlayScreen from './src/screens/Play/PlayScreen';
 import AccountScreen from './src/screens/Account/AccountScreen';
 
+// Context
+import { AuthContext } from './src/context/authContext';
+
 // Redux
 import { Provider } from 'react-redux';
 import { store } from './src/store';
 
-const switchNavigator = createSwitchNavigator({
-  // loginFlow: createStackNavigator({
-  //   Signin: SigninScreen,
-  //   Signup: SignupScreen
-  // }),
-  mainFlow: createBottomTabNavigator({
-    Home: createStackNavigator({
-      Home: HomeScreen,
-      Play: PlayScreen
-    }),
-    Account: AccountScreen,
-  }),
-})
+// Set up Stack Navigator
+const Tab = createBottomTabNavigator();
+const GameStack = createNativeStackNavigator();
 
-const App = createAppContainer(switchNavigator);
+function GameScreen() {
+  return (
+    <GameStack.Navigator>
+      <GameStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+      <GameStack.Screen name="PlayScreen" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher/Lower', headerTransparent: true }} />
+    </GameStack.Navigator>
+  );
+}
 
 export default () => {
+  const [authState, dispatch] = useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null
+    }
+  );
+
+  useEffect(() => {
+    const bootstrapAsync = async () => {
+      let userToken;
+
+      try {
+        userToken = await SecureStore.getItemAsync('userToken');
+      } catch (e) {
+        console.log(e);
+      };
+
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+    };
+
+    bootstrapAsync();
+  }, []);
+
+  const authContext = useMemo(() => ({
+    signIn: async data => {
+      dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+    },
+    signOut: () => dispatch({ type: 'SIGN_OUT' }),
+    signUp: async data => {
+      dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+    }
+  }), []);
+
   return (
     <Provider store={store}>
-      <App />
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer>
+          {authState.userToken ?
+            <Tab.Navigator screenOptions={{
+              headerShown: false
+            }}>
+              <Tab.Screen name="Game" component={GameScreen} options={{
+                tabBarLabel: 'Play',
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="list" color={color} size={size} />
+                ),
+              }} />
+              <Tab.Screen name="Settings" component={AccountScreen} options={{
+                tabBarLabel: 'Account',
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="user-circle" color={color} size={size} />
+                ),
+              }} />
+            </Tab.Navigator>
+            :
+            <Tab.Navigator screenOptions={{
+              headerShown: false
+            }}>
+              <Tab.Screen name="Sign In" component={SigninScreen} options={{
+                tabBarLabel: 'Sign In',
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="key" color={color} size={size} />
+                ),
+              }} />
+              <Tab.Screen name="Sign Up" component={SignupScreen} options={{
+                tabBarLabel: 'Sign Up',
+                tabBarIcon: ({ color, size }) => (
+                  <Icon name="sign-in" color={color} size={size} />
+                ),
+              }} />
+            </Tab.Navigator>
+          }
+        </NavigationContainer>
+      </AuthContext.Provider>
     </Provider>
   );
 }
