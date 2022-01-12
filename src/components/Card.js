@@ -1,28 +1,48 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import DropShadow from "react-native-drop-shadow";
+import { startGame, updateScore, updateHighScore, updateCurrentCard, updateLastCard } from '../screens/Play/PlayScreenSlice';
 
-const Card = ({ image, number }) => {
+const Card = ({ number }) => {
     const color = 'red'
     const size = 30
 
+    // Selectors
+    const currentCard = useSelector(state => state.Play.currentCard)
+    const lastCard = useSelector(state => state.Play.lastCard)
+    const cardStack = useSelector(state => state.Play.cardStack)
+
+    const dispatch = useDispatch();
+
     return (
-        <View style={styles.card} >
-            <View style={styles.topImage} ><Icon name="heart" color={color} size={size} /></View>
-            <View style={styles.numberContainer} ><Text style={styles.number} >{number}</Text></View>
-            <View style={styles.bottomImage} ><Icon name="heart" color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
-        </View>
+        <DropShadow style={styles.shadowProp} >
+            <View style={styles.card} >
+                {currentCard.number ?
+                    <>
+                        <View style={styles.topImage} ><Icon name="heart" color={color} size={size} /></View>
+                        <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
+                        <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
+                    </>
+                    :
+                    <>
+                        <TouchableOpacity style={styles.numberContainer} onPress={() => dispatch(startGame())} ><Text style={styles.welcome} >Press to play!</Text></TouchableOpacity>
+                    </>
+                }
+
+            </View>
+        </DropShadow >
     )
 }
 
 const styles = StyleSheet.create({
     card: {
-        height: '60%',
+        height: 320,
         width: '70%',
         backgroundColor: 'white',
         justifyContent: 'space-between',
-        borderRadius: 5,
-        marginBottom: 50
+        borderRadius: 8,
     },
     topImage: {
         flexDirection: 'row',
@@ -34,8 +54,12 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center'
     },
+    welcome: {
+        fontSize: 50
+    },
     number: {
-        fontSize: 60
+        fontSize: 100,
+        fontWeight: 'bold'
     },
     bottomImage: {
         flexDirection: 'row',
@@ -50,6 +74,16 @@ const styles = StyleSheet.create({
     },
     color: {
         color: 'red'
+    },
+    shadowProp: {
+        shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 25
     }
 })
 

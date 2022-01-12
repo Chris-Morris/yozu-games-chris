@@ -1,27 +1,16 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, StyleSheet } from 'react-native';
-import { selectGreeting, changeGreeting } from './PlayScreenSlice';
-import { Divider } from 'react-native-elements';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
 // Import Components
 import Stats from '../../components/Stats';
 import Card from '../../components/Card';
 import ButtonContainer from '../../components/ButtonContainer';
 
-const PlayScreen = ({ navigation }) => {
-    const [greeting, setGreeting] = useState('');
-    const dispatch = useDispatch();
-    const selectedGreeting = useSelector(state => state.Home.greeting);
-
-    const handlePress = () => {
-        dispatch(changeGreeting(greeting))
-    }
+const PlayScreen = () => {
 
     return (
         <View style={styles.container}>
             <Stats style={styles.stats} />
-            {/* <Divider width={5} color={'black'} /> */}
             <View
                 style={{
                     borderBottomColor: '#c0c0c0',
@@ -35,12 +24,6 @@ const PlayScreen = ({ navigation }) => {
         </View>
     )
 }
-
-PlayScreen.navigationOptions = () => {
-    return {
-        tabBarVisible: false
-    };
-};
 
 const styles = StyleSheet.create({
     container: {
