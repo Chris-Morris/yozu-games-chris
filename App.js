@@ -91,72 +91,15 @@ export default () => {
     }
   }), []);
 
-  // return (
-  //   <Provider store={store}>
-  //     <AuthContext.Provider value={authContext}>
-  //       <NavigationContainer>
-  //         {authState.userToken ?
-  //           <Tab.Navigator screenOptions={{
-  //             headerShown: false
-  //           }}>
-  //             <Tab.Screen name="Play" component={GameScreen} options={{
-  //               tabBarLabel: 'Play',
-  //               tabBarIcon: ({ color, size }) => (
-  //                 <Icon name="list" color={color} size={size} />
-  //               ),
-  //             }} />
-  //             <Tab.Screen name="Settings" component={AccountScreen} options={{
-  //               tabBarLabel: 'Account',
-  //               tabBarIcon: ({ color, size }) => (
-  //                 <Icon name="user-circle" color={color} size={size} />
-  //               ),
-  //             }} />
-  //           </Tab.Navigator>
-  //           :
-  //           <Tab.Navigator screenOptions={{
-  //             headerShown: false
-  //           }}>
-  //             <Tab.Screen name="Sign In" component={SigninScreen} options={{
-  //               tabBarLabel: 'Sign In',
-  //               tabBarIcon: ({ color, size }) => (
-  //                 <Icon name="key" color={color} size={size} />
-  //               ),
-  //             }} />
-  //             <Tab.Screen name="Sign Up" component={SignupScreen} options={{
-  //               tabBarLabel: 'Sign Up',
-  //               tabBarIcon: ({ color, size }) => (
-  //                 <Icon name="sign-in" color={color} size={size} />
-  //               ),
-  //             }} />
-  //           </Tab.Navigator>
-  //         }
-  //       </NavigationContainer>
-  //     </AuthContext.Provider>
-  //   </Provider>
-  // );
-
-  // Experimental Navigator
   return (
     <Provider store={store}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer>
           {authState.userToken ?
-            <Tab.Navigator screenOptions={{
-              headerShown: false
-            }}>
-              <Tab.Screen name="Play" component={GameScreen} options={{
-                tabBarLabel: 'Play',
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="list" color={color} size={size} />
-                ),
-              }} />
-              <Tab.Screen name="Settings" component={AccountScreen} options={{
-                tabBarLabel: 'Account',
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="user-circle" color={color} size={size} />
-                ),
-              }} />
-            </Tab.Navigator>
+            <GameStack.Navigator>
+              <GameStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher/Lower', headerTransparent: true }} />
+            </GameStack.Navigator>
             :
             <Tab.Navigator screenOptions={{
               headerShown: false
