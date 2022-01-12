@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, StyleSheet } from 'react-native';
+import { resetGame } from '../Play/PlayScreenSlice';
 
 // Import Components
 import Stats from '../../components/Stats';
@@ -7,6 +10,14 @@ import Card from '../../components/Card';
 import ButtonContainer from '../../components/ButtonContainer';
 
 const PlayScreen = () => {
+    const dispatch = useDispatch();
+
+    useFocusEffect(
+        useCallback(() => {
+
+            return () => dispatch(resetGame());
+        }, [])
+    );
 
     return (
         <View style={styles.container}>

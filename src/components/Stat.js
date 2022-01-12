@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stat = ({ statName, statNumber, icon }) => {
 
@@ -10,7 +10,7 @@ const Stat = ({ statName, statNumber, icon }) => {
                 <Text style={styles.statName} >{statName}</Text>
                 <View style={styles.withIcon} >
                     <Text style={styles.statName} >{statNumber}</Text>
-                    <Icon name="heart" style={styles.statIcon} />
+                    <Icon name={`cards-${icon}`} style={styles.statIcon} />
                 </View>
             </View >
             :
@@ -31,10 +31,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     statIcon: {
-        color: 'red',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'white'
+        color: 'white'
     },
     withIcon: {
         flexDirection: 'row',

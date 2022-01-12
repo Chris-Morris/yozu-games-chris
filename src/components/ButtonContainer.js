@@ -4,9 +4,9 @@ import Button from './Button';
 
 const ButtonContainer = () => {
     return (
-        <View style={ styles.container } >
-            <Button title="Higher" pressed={ styles.button } />
-            <Button title="Lower" pressed={ styles.button } />
+        <View style={styles.container} >
+            <Button title="Higher" pressed={styles.button} role={'increment'} />
+            <Button title="Lower" pressed={styles.button} role={'decrement'} />
         </View>
     )
 }
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     button: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgb(0245, 106, 104)',
+        backgroundColor: 'rgb(245, 106, 104)',
         width: '50%',
         color: 'white'
     }

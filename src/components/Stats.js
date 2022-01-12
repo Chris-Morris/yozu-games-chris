@@ -1,14 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 
 import Stat from './Stat';
 
 const Stats = () => {
+    const score = useSelector(state => state.Play.score)
+    const highScore = useSelector(state => state.Play.highScore)
+    const lastCard = useSelector(state => state.Play.lastCard)
+
     return (
         <View style={styles.container} >
-            <Stat statName={"High Score"} statNumber={53} />
-            <Stat statName={"Score"} statNumber={53} />
-            <Stat statName={"Last Card"} statNumber={53} icon />
+            <Stat statName={"High Score"} statNumber={highScore} />
+            <Stat statName={"Score"} statNumber={score} />
+            <Stat statName={"Last Card"} statNumber={lastCard.number} icon={lastCard.suit} />
         </View>
     )
 }

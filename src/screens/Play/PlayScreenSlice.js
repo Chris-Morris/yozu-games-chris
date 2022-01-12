@@ -16,32 +16,53 @@ const initialState = {
 }
 
 const initiateGame = (state) => {
-    for (let i = 0; i <= 9; i++) {
-        state.cardStack.push(suitsArray[i])
+    for (let i = 0; i < 10; i++) {
+        const index = Math.floor(Math.random() * (suitsArray.length - 0) + 0);
+        state.cardStack.push(suitsArray[index])
     }
 
     state.currentCard = state.cardStack[0]
-    console.log(state.currentCard)
 }
 
 const PlayScreenSlice = createSlice({
     name: 'Play',
     initialState,
     reducers: {
-        startGame: (state, action) => {
-            initiateGame(state)
+        startGame: (state) => {
+            initiateGame(state);
         },
         updateScore: (state, action) => {
-            state.score = action.payload
+            state.score = action.payload;
         },
         updateHighScore: (state, action) => {
-            state.highScore = action.payload
+            state.highScore = action.payload;
         },
-        updateCurrentCard: (state, action) => {
-            state.currentCard = action.payload
+        updateCurrentCard: (state) => {
+            if (state.cardStack.length > 1) {
+                state.cardStack.splice(0, 1);
+                state.currentCard = state.cardStack[0];
+            } else {
+                state.currentCard = {
+                    number: null,
+                    suit: ''
+                }
+            }
+
         },
         updateLastCard: (state, action) => {
-            state.lastCard = action.payload
+            state.lastCard = action.payload;
+        },
+        resetGame: (state) => {
+            state.currentCard = {
+                number: null,
+                suit: ''
+            };
+            state.lastCard = {
+                number: null,
+                suit: ''
+            };
+            state.score = 0;
+            state.cardStack = [];
         }
     }
 })
@@ -51,5 +72,5 @@ export const selectHighScore = state => state.highScore;
 export const selectCurrentCard = state => state.currentCard;
 export const selectLastCard = state => state.lastCard;
 
-export const { startGame, updateScore, updateHighScore, updateCurrentCard, updateLastCard } = PlayScreenSlice.actions;
+export const { startGame, updateScore, updateHighScore, updateCurrentCard, updateLastCard, resetGame } = PlayScreenSlice.actions;
 export default PlayScreenSlice.reducer;

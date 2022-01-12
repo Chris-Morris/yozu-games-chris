@@ -4,15 +4,23 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
 import { startGame, updateScore, updateHighScore, updateCurrentCard, updateLastCard } from '../screens/Play/PlayScreenSlice';
+import { current } from '@reduxjs/toolkit';
 
 const Card = ({ number }) => {
-    const color = 'red'
-    const size = 30
-
     // Selectors
     const currentCard = useSelector(state => state.Play.currentCard)
     const lastCard = useSelector(state => state.Play.lastCard)
     const cardStack = useSelector(state => state.Play.cardStack)
+
+    let color = 'red'
+    const size = 30
+    if (currentCard) {
+        if (currentCard.suit == 'club' || currentCard.suit == 'spade') {
+            color = 'black';
+        } else {
+            color = 'red'
+        };
+    };
 
     const dispatch = useDispatch();
 
@@ -21,7 +29,7 @@ const Card = ({ number }) => {
             <View style={styles.card} >
                 {currentCard.number ?
                     <>
-                        <View style={styles.topImage} ><Icon name="heart" color={color} size={size} /></View>
+                        <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
                         <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
                         <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
                     </>
