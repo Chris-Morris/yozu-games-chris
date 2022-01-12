@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { selectGreeting, changeGreeting } from './PlayScreenSlice';
+import { Divider } from 'react-native-elements';
 
 // Import Components
 import Stats from '../../components/Stats';
-import Divider from '../../components/Divider';
 import Card from '../../components/Card';
 import ButtonContainer from '../../components/ButtonContainer';
 
@@ -21,8 +21,16 @@ const PlayScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Stats style={styles.stats} />
-            <Divider />
-            <Card number={selectedGreeting} />
+            {/* <Divider width={5} color={'black'} /> */}
+            <View
+                style={{
+                    borderBottomColor: '#c0c0c0',
+                    borderBottomWidth: 1.5,
+                    width: '70%',
+                    marginBottom: 15
+                }}
+            />
+            <Card number={5} />
             <ButtonContainer />
         </View>
     )
@@ -38,7 +46,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'rgb(228, 70, 67)',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 10
     }
 });
 

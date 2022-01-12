@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
+import Stat from './Stat';
 
 const Stats = () => {
     return (
-        <View style={ styles.container } >
-            <Text style={ styles.text } >High Score</Text>
-            <Text style={ styles.text } >Score</Text>
-            <Text style={ styles.text } >Last Card</Text>
+        <View style={styles.container} >
+            <Stat statName={"High Score"} statNumber={53} />
+            <Stat statName={"Score"} statNumber={53} />
+            <Stat statName={"Last Card"} statNumber={53} icon />
         </View>
     )
 }
@@ -16,15 +18,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 50,
-        height: 200,
+        alignItems: 'center',
         alignSelf: 'stretch',
         paddingHorizontal: 30
-    },
-    button: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgb(245, 106, 104)'
     },
     text: {
         color: 'white'
