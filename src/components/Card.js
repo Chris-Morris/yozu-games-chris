@@ -3,14 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
-import { startGame, updateScore, updateHighScore, updateCurrentCard, updateLastCard } from '../screens/Play/PlayScreenSlice';
-import { current } from '@reduxjs/toolkit';
+import { startGame } from '../screens/Play/PlayScreenSlice';
 
-const Card = ({ number }) => {
+const Card = () => {
     // Selectors
     const currentCard = useSelector(state => state.Play.currentCard)
-    const lastCard = useSelector(state => state.Play.lastCard)
-    const cardStack = useSelector(state => state.Play.cardStack)
 
     let color = 'red'
     const size = 30
