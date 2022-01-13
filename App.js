@@ -24,7 +24,7 @@ import { AuthContext } from './src/context/authContext';
 
 // Redux
 import { Provider } from 'react-redux';
-import { store } from './src/store';
+import { store } from './src/redux/store';
 
 // Set up Stack Navigator
 const Tab = createBottomTabNavigator();
