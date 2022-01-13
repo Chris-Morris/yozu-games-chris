@@ -25,7 +25,10 @@ import { store } from './src/store';
 const Tab = createBottomTabNavigator();
 const GameStack = createNativeStackNavigator();
 
-function GameScreen() {
+function GameScreen({ navigation, route }) {
+  if (route.state && route.state.index > 0) {
+    navigation.setOptions({ tabBarVisible: false });
+  };
   return (
     <GameStack.Navigator>
       <GameStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />

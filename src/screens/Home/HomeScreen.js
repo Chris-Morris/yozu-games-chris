@@ -9,11 +9,21 @@ const HomeScreen = ({ navigation }) => {
     const selectedGreeting = useSelector(state => state.Home.greeting);
     const { signOut } = useContext(AuthContext);
 
+    // return (
+    //     <View style={styles.container}>
+    //         <Text style={styles.greeting} >Welcome to Yozu Games!</Text>
+    //         <TouchableOpacity style={styles.play} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity>
+    //         <TouchableOpacity style={styles.signOut} onPress={() => signOut()} ><Text style={styles.buttonText} >Sign Out</Text></TouchableOpacity>
+    //     </View>
+    // )
+
     return (
         <View style={styles.container}>
-            <Text style={styles.greeting} >Welcome to Yozu Games!</Text>
-            <TouchableOpacity style={styles.play} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.signOut} onPress={() => signOut()} ><Text style={styles.buttonText} >Sign Out</Text></TouchableOpacity>
+            <Text style={styles.greeting} >Yozu Games</Text>
+            <View>
+                <TouchableOpacity style={styles.play} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.signOut} onPress={() => signOut()} ><Text style={styles.buttonText} >Sign Out</Text></TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -27,7 +37,7 @@ HomeScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(228, 70, 67)',
+        backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 100
