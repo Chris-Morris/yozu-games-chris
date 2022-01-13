@@ -1,19 +1,42 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-const LostScreen = ({ navigation }) => {
+const EndGameScreen = ({ route, navigation }) => {
+    const { destination } = route.params;
+    console.log(destination)
+
     return (
         <View style={styles.pageContainer} >
             <View style={styles.block} ></View>
             <View style={styles.headerContainer} >
-                <Text style={styles.header} >Sorry, you've lost!</Text>
-                <Text style={styles.subHeader} >Bad luck this time</Text>
+                {destination === 'Won' ?
+                    <>
+                        <Text style={styles.header} >Congratulations!</Text>
+                        <Text style={styles.subHeader} >New Highest Score</Text>
+                    </>
+                    :
+                    <>
+                        <Text style={styles.header} >Sorry, you've lost!</Text>
+                        <Text style={styles.subHeader} >Bad luck this time</Text>
+                    </>
+                }
             </View>
             <View style={styles.circleContainer} >
-                <Text style={styles.score} >5</Text>
-                <View style={styles.innerCircle} ></View>
-                <View style={styles.mainCircle} ></View>
-                <View style={styles.outerCircle} ></View>
+                {destination === 'Won' ?
+                    <>
+                        <Text style={styles.score} >Won</Text>
+                        <View style={styles.innerCircle} ></View>
+                        <View style={styles.mainCircle} ></View>
+                        <View style={styles.outerCircle} ></View>
+                    </>
+                    :
+                    <>
+                        <Text style={styles.score} >Lost</Text>
+                        <View style={styles.innerCircle} ></View>
+                        <View style={styles.mainCircle} ></View>
+                        <View style={styles.outerCircle} ></View>
+                    </>
+                }
             </View>
             <TouchableOpacity style={styles.backToMenuButton} onPress={() => navigation.navigate('Home')} ><Text style={styles.backToMenuText} >Back to Menu</Text></TouchableOpacity>
         </View>
@@ -97,4 +120,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LostScreen
+export default EndGameScreen

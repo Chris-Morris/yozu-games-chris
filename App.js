@@ -17,7 +17,7 @@ import PlayScreen from './src/screens/Play/PlayScreen';
 import StatsScreen from './src/screens/Stats/StatsScreen';
 import AwardsScreen from './src/screens/Awards/AwardsScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
-import LostScreen from './src/screens/Lost/LostScreen';
+import EndGameScreen from './src/screens/EndGame/EndGameScreen';
 
 // Context
 import { AuthContext } from './src/context/authContext';
@@ -51,8 +51,8 @@ function HomeTabs() {
           <Material name="star-circle-outline" color={color} size={size} />
         )
       }} />
-      <Tab.Screen name="Lost" component={LostScreen} options={{
-        tabBarLabel: 'LOST',
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{
+        tabBarLabel: 'PROFILE',
         tabBarIcon: ({ color, size }) => (
           <Entypo name="heart-outlined" color={color} size={size} />
         )
@@ -126,6 +126,7 @@ export default () => {
             <GameStack.Navigator>
               <GameStack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
               <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTransparent: true }} />
+              <GameStack.Screen name="EndGame" component={EndGameScreen} options={{ headerShown: false }} />
             </GameStack.Navigator>
             :
             <Tab.Navigator screenOptions={{
