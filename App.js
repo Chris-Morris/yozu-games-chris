@@ -1,6 +1,8 @@
 import React, { useReducer, useMemo, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Material from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 // Import Navigation libs
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,7 +14,9 @@ import SignupScreen from './src/screens/Signup/SignupScreen';
 import SigninScreen from './src/screens/Signin/SigninScreen';
 import HomeScreen from './src/screens/Home/HomeScreen';
 import PlayScreen from './src/screens/Play/PlayScreen';
-import AccountScreen from './src/screens/Account/AccountScreen';
+import StatsScreen from './src/screens/Stats/StatsScreen';
+import AwardsScreen from './src/screens/Awards/AwardsScreen';
+import ProfileScreen from './src/screens/Profile/ProfileScreen';
 
 // Context
 import { AuthContext } from './src/context/authContext';
@@ -25,16 +29,35 @@ import { store } from './src/store';
 const Tab = createBottomTabNavigator();
 const GameStack = createNativeStackNavigator();
 
-function GameScreen({ navigation, route }) {
-  if (route.state && route.state.index > 0) {
-    navigation.setOptions({ tabBarVisible: false });
-  };
+function HomeTabs() {
   return (
-    <GameStack.Navigator>
-      <GameStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-      <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher/Lower', headerTransparent: true }} />
-    </GameStack.Navigator>
-  );
+    <Tab.Navigator screenOptions={{ headerShown: false }} >
+      <Tab.Screen name="Home" component={HomeScreen} options={{
+        tabBarLabel: 'GAMES',
+        tabBarIcon: ({ color, size }) => (
+          <Material name="dice-5-outline" color={color} size={size} />
+        )
+      }} />
+      <Tab.Screen name="Stats" component={StatsScreen} options={{
+        tabBarLabel: 'STATS',
+        tabBarIcon: ({ color, size }) => (
+          <Entypo name="text-document" color={color} size={size} />
+        )
+      }} />
+      <Tab.Screen name="Awards" component={AwardsScreen} options={{
+        tabBarLabel: 'AWARDS',
+        tabBarIcon: ({ color, size }) => (
+          <Material name="star-circle-outline" color={color} size={size} />
+        )
+      }} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{
+        tabBarLabel: 'PROFILE',
+        tabBarIcon: ({ color, size }) => (
+          <Entypo name="heart-outlined" color={color} size={size} />
+        )
+      }} />
+    </Tab.Navigator>
+  )
 }
 
 export default () => {
@@ -100,8 +123,8 @@ export default () => {
         <NavigationContainer>
           {authState.userToken ?
             <GameStack.Navigator>
-              <GameStack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTintColor: 'white', headerStyle: { backgroundColor: '#F56A68' } }} />
+              <GameStack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
+              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTransparent: true }} />
             </GameStack.Navigator>
             :
             <Tab.Navigator screenOptions={{
@@ -110,13 +133,13 @@ export default () => {
               <Tab.Screen name="Sign In" component={SigninScreen} options={{
                 tabBarLabel: 'Sign In',
                 tabBarIcon: ({ color, size }) => (
-                  <Icon name="key" color={color} size={size} />
+                  <FontAwesome name="key" color={color} size={size} />
                 ),
               }} />
               <Tab.Screen name="Sign Up" component={SignupScreen} options={{
                 tabBarLabel: 'Sign Up',
                 tabBarIcon: ({ color, size }) => (
-                  <Icon name="sign-in" color={color} size={size} />
+                  <FontAwesome name="sign-in" color={color} size={size} />
                 ),
               }} />
             </Tab.Navigator>

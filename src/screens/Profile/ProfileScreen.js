@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { AuthContext } from '../../context/authContext';
 
-const AccountScreen = () => {
+const ProfileScreen = () => {
     const { signOut } = useContext(AuthContext);
 
     return (
@@ -17,7 +17,7 @@ const AccountScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(228, 70, 67)',
+        backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AccountScreen
+export default ProfileScreen
