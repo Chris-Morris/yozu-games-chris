@@ -125,7 +125,7 @@ export default () => {
           {authState.userToken ?
             <GameStack.Navigator>
               <GameStack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
-              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTransparent: true }} />
+              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: true }} />
               <GameStack.Screen name="EndGame" component={EndGameScreen} options={{ headerShown: false }} />
             </GameStack.Navigator>
             :

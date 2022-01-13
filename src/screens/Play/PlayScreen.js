@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { resetGame } from '../Play/PlayScreenSlice';
 
 // Import Components
@@ -12,12 +12,22 @@ import ButtonContainer from '../../components/ButtonContainer';
 const PlayScreen = ({ navigation }) => {
     const dispatch = useDispatch();
 
-    useFocusEffect(
-        useCallback(() => {
+    const endGame = useSelector(state => state.Play.endGame);
+    const newHighScore = useSelector(state => state.Play.newHighScore);
 
-            return () => dispatch(resetGame());
-        }, [])
-    );
+    if (endGame) {
+        if (newHighScore) {
+            navigation.navigate('EndGame', { destination: "Won" });
+        } else {
+            navigation.navigate('EndGame', { destination: "Lost" });
+        };
+    };
+
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         dispatch(resetGame())
+    //     }, [])
+    // );
 
     return (
         <View style={styles.container}>
@@ -30,8 +40,6 @@ const PlayScreen = ({ navigation }) => {
                     marginBottom: 15
                 }}
             />
-            <TouchableOpacity style={{ height: 30, backgroundColor: 'white', marginBottom: 20 }} onPress={() => navigation.navigate('EndGame', { destination: "Won" })} ><Text>Won Screen</Text></TouchableOpacity>
-            <TouchableOpacity style={{ height: 30, backgroundColor: 'white' }} onPress={() => navigation.navigate('EndGame', { destination: "Won" })} ><Text>Lost Screen</Text></TouchableOpacity>
             <Card number={5} />
             <ButtonContainer />
         </View>

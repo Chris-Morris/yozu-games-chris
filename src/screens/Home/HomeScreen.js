@@ -1,22 +1,19 @@
-import React, { useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import FotAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
-// Import Context
-import { AuthContext } from '../../context/authContext';
+import { resetHighScore, resetGame } from '../Play/PlayScreenSlice';
 
 const HomeScreen = ({ navigation }) => {
-    const selectedGreeting = useSelector(state => state.Home.greeting);
-    const { signOut } = useContext(AuthContext);
+    const dispatch = useDispatch();
 
-    // return (
-    //     <View style={styles.container}>
-    //         <Text style={styles.greeting} >Welcome to Yozu Games!</Text>
-    //         <TouchableOpacity style={styles.play} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity>
-    //         <TouchableOpacity style={styles.signOut} onPress={() => signOut()} ><Text style={styles.buttonText} >Sign Out</Text></TouchableOpacity>
-    //     </View>
-    // )
+    useFocusEffect(
+        useCallback(() => {
+            dispatch(resetGame());
+            dispatch(resetHighScore());
+        }, [])
+    );
 
     return (
         <View style={styles.container}>

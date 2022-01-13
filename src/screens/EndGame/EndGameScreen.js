@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { setEndGame, resetGame } from '../Play/PlayScreenSlice';
 
 const EndGameScreen = ({ route, navigation }) => {
     const { destination } = route.params;
-    console.log(destination)
+    const dispatch = useDispatch();
+
+    const score = useSelector(state.state.Play.score);
+
+    useFocusEffect(
+        useCallback(() => {
+            dispatch(resetGame());
+            return () => dispatch(setEndGame(false));
+        }, [])
+    );
 
     return (
         <View style={styles.pageContainer} >
@@ -24,7 +36,7 @@ const EndGameScreen = ({ route, navigation }) => {
             <View style={styles.circleContainer} >
                 {destination === 'Won' ?
                     <>
-                        <Text style={styles.score} >Won</Text>
+                        <Text style={styles.score} >{score}</Text>
                         <View style={styles.innerCircle} ></View>
                         <View style={styles.mainCircle} ></View>
                         <View style={styles.outerCircle} ></View>
@@ -38,7 +50,7 @@ const EndGameScreen = ({ route, navigation }) => {
                     </>
                 }
             </View>
-            <TouchableOpacity style={styles.backToMenuButton} onPress={() => navigation.navigate('Home')} ><Text style={styles.backToMenuText} >Back to Menu</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.backToMenuButton} onPress={() => navigation.navigate('Play')} ><Text style={styles.backToMenuText} >Back to Menu</Text></TouchableOpacity>
         </View>
     )
 }

@@ -5,6 +5,7 @@ const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king'
 const initialState = {
     score: 0,
     highScore: 0,
+    newHighScore: false,
     currentCard: {
         number: null,
         suit: ''
@@ -13,7 +14,8 @@ const initialState = {
         number: null,
         suit: ''
     },
-    cardStack: []
+    cardStack: [],
+    endGame: false
 }
 
 const initiateGame = (state) => {
@@ -57,6 +59,7 @@ const PlayScreenSlice = createSlice({
                     number: null,
                     suit: ''
                 };
+                state.endGame = true
             }
 
             if (action.payload === 'higher') {
@@ -71,7 +74,11 @@ const PlayScreenSlice = createSlice({
 
             if (state.score > state.highScore) {
                 state.highScore = state.score;
+                state.newHighScore = true;
             };
+        },
+        setEndGame: (state, action) => {
+            state.endGame = action.payload;
         },
         resetGame: (state) => {
             state.currentCard = {
@@ -83,9 +90,12 @@ const PlayScreenSlice = createSlice({
                 suit: ''
             };
             state.score = 0;
-            state.highScore = 0;
             state.cardStack = [];
             state.turn = 1;
+        },
+        resetHighScore: (state) => {
+            state.highScore = 0;
+            state.newHighScore = false;
         }
     }
 })
@@ -95,5 +105,5 @@ export const selectHighScore = state => state.highScore;
 export const selectCurrentCard = state => state.currentCard;
 export const selectLastCard = state => state.lastCard;
 
-export const { startGame, guess, resetGame } = PlayScreenSlice.actions;
+export const { startGame, guess, setEndGame, resetGame, resetHighScore } = PlayScreenSlice.actions;
 export default PlayScreenSlice.reducer;
