@@ -1,4 +1,5 @@
 import React, { useReducer, useMemo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as SecureStore from 'expo-secure-store';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -25,6 +26,7 @@ import { AuthContext } from './src/context/authContext';
 // Redux
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
+import { restoreToken, signIn, signOut } from './src/redux/AuthSlice';
 
 // Set up Stack Navigator
 const Tab = createBottomTabNavigator();
@@ -62,35 +64,36 @@ function HomeTabs() {
 }
 
 export default () => {
-  const [authState, dispatch] = useReducer(
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null
-    }
-  );
+  const dispatch = useDispatch();
+  // const [authState, dispatch] = useReducer(
+  //   (prevState, action) => {
+  //     switch (action.type) {
+  //       case 'RESTORE_TOKEN':
+  //         return {
+  //           ...prevState,
+  //           userToken: action.token,
+  //           isLoading: false
+  //         };
+  //       case 'SIGN_IN':
+  //         return {
+  //           ...prevState,
+  //           isSignout: false,
+  //           userToken: action.token
+  //         };
+  //       case 'SIGN_OUT':
+  //         return {
+  //           ...prevState,
+  //           isSignout: true,
+  //           userToken: null
+  //         };
+  //     }
+  //   },
+  //   {
+  //     isLoading: true,
+  //     isSignout: false,
+  //     userToken: null
+  //   }
+  // );
 
   useEffect(() => {
     const bootstrapAsync = async () => {
@@ -102,7 +105,7 @@ export default () => {
         console.log(e);
       };
 
-      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+      dispatch(restoreToken(userToken));
     };
 
     bootstrapAsync();
