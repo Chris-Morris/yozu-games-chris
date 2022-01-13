@@ -22,23 +22,6 @@ const Card = () => {
     const dispatch = useDispatch();
 
     return (
-        // <DropShadow style={styles.shadowProp} >
-        //     <View style={styles.card} >
-        //         {currentCard.number ?
-        //             <>
-        //                 <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
-        //                 <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
-        //                 <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
-        //             </>
-        //             :
-        //             <>
-        //                 <TouchableOpacity style={styles.startGameButton} onPress={() => dispatch(startGame())} ><Text style={styles.welcome} >Press to play!</Text></TouchableOpacity>
-        //             </>
-        //         }
-
-        //     </View>
-        // </DropShadow >
-
         <DropShadow style={styles.shadowProp} >
             {currentCard.number ?
                 <View style={styles.card} >

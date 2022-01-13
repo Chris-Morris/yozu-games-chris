@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useFocusEffect } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
-import { resetGame } from '../Play/PlayScreenSlice';
 
 // Import Components
 import Stats from '../../components/Stats';
@@ -10,7 +8,6 @@ import Card from '../../components/Card';
 import ButtonContainer from '../../components/ButtonContainer';
 
 const PlayScreen = ({ navigation }) => {
-    const dispatch = useDispatch();
 
     const endGame = useSelector(state => state.Play.endGame);
     const newHighScore = useSelector(state => state.Play.newHighScore);
@@ -22,12 +19,6 @@ const PlayScreen = ({ navigation }) => {
             navigation.navigate('EndGame', { destination: "Lost" });
         };
     };
-
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         dispatch(resetGame())
-    //     }, [])
-    // );
 
     return (
         <View style={styles.container}>

@@ -2,18 +2,21 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFocusEffect } from '@react-navigation/native';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { setEndGame, resetGame } from '../Play/PlayScreenSlice';
+import { setEndGame, resetGame, resetNewHighScore } from '../Play/PlayScreenSlice';
 
 const EndGameScreen = ({ route, navigation }) => {
     const { destination } = route.params;
     const dispatch = useDispatch();
 
-    const score = useSelector(state.state.Play.score);
+    const score = useSelector(state => state.Play.score);
 
     useFocusEffect(
         useCallback(() => {
-            dispatch(resetGame());
-            return () => dispatch(setEndGame(false));
+            return () => {
+                dispatch(resetGame());
+                dispatch(resetNewHighScore());
+                dispatch(setEndGame(false));
+            }
         }, [])
     );
 
@@ -39,11 +42,10 @@ const EndGameScreen = ({ route, navigation }) => {
                         <Text style={styles.score} >{score}</Text>
                         <View style={styles.innerCircle} ></View>
                         <View style={styles.mainCircle} ></View>
-                        <View style={styles.outerCircle} ></View>
                     </>
                     :
                     <>
-                        <Text style={styles.score} >Lost</Text>
+                        <Text style={styles.score} >{score}</Text>
                         <View style={styles.innerCircle} ></View>
                         <View style={styles.mainCircle} ></View>
                         <View style={styles.outerCircle} ></View>
