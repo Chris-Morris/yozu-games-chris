@@ -2,8 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
-import FotAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { resetHighScore, resetGame } from '../Play/PlayScreenSlice';
+import YozuGames from '../../components/YozuGames';
 
 const HomeScreenAnimated = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -64,13 +64,12 @@ const HomeScreenAnimated = ({ navigation }) => {
                 animatedBox3.setValue(600);
                 animatedBox4.setValue(600);
             }
-        })
+        }, [])
     );
 
     return (
         <View style={styles.container}>
-            <FotAwesome5 name="dice" color="#FEC145" size={30} />
-            <Text style={styles.greeting} >Yozu Games</Text>
+            <YozuGames />
             <View style={styles.gameContainer} >
                 <Animated.View style={{ transform: [{ translateY: animatedBox1 }] }} ><TouchableOpacity style={[styles.gameButton, styles.higherLower]} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity></Animated.View>
                 <Animated.View style={{ transform: [{ translateY: animatedBox2 }] }} ><TouchableOpacity style={[styles.gameButton, styles.simonSays]} onPress={() => alert('Sorry, Simon Says is currently in development.')} ><Text style={styles.buttonText} >Simon Says</Text></TouchableOpacity></Animated.View>
@@ -98,12 +97,6 @@ const styles = StyleSheet.create({
     gameContainer: {
         height: 320,
         justifyContent: 'space-between'
-    },
-    greeting: {
-        fontSize: 30,
-        marginBottom: 30,
-        textAlign: 'center',
-        color: '#FEC145'
     },
     gameButton: {
         height: 66,

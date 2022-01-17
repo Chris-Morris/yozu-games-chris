@@ -9,11 +9,16 @@ const Stats = () => {
     const highScore = useSelector(state => state.Play.highScore)
     const lastCard = useSelector(state => state.Play.lastCard)
 
+    let lastCardNumber = 0;
+    if (lastCard.number) {
+        lastCardNumber = lastCard.number;
+    }
+
     return (
         <View style={styles.container} >
             <Stat statName={"High Score"} statNumber={highScore} />
             <Stat statName={"Score"} statNumber={score} />
-            <Stat statName={"Last Card"} statNumber={lastCard.number} icon={lastCard.suit} />
+            <Stat statName={"Last Card"} statNumber={lastCardNumber} icon={lastCard.suit} />
         </View>
     )
 }
