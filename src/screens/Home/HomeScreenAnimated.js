@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import FotAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { resetHighScore, resetGame } from '../Play/PlayScreenSlice';
 
@@ -64,7 +64,7 @@ const HomeScreenAnimated = ({ navigation }) => {
                 animatedBox3.setValue(600);
                 animatedBox4.setValue(600);
             }
-        }, [])
+        })
     );
 
     return (

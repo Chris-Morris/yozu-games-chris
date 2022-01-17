@@ -106,7 +106,7 @@ export default () => {
         console.log(e);
       };
 
-      dispatch({ type: 'RESTORE_TOKEN', token: 'dummy_token' });
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
     bootstrapAsync();
@@ -129,7 +129,14 @@ export default () => {
           {authState.userToken ?
             <GameStack.Navigator>
               <GameStack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
-              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: true }} />
+              <GameStack.Screen name="Play" component={PlayScreen} options={{
+                headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: false, headerStyle: {
+                  backgroundColor: '#F56A68',
+                }, headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: 'white'
+                }
+              }} />
               <GameStack.Screen name="EndGame" component={EndGameScreen} options={{ headerShown: false }} />
             </GameStack.Navigator>
             :

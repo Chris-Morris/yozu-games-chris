@@ -23,18 +23,11 @@ const Card = () => {
 
     return (
         <DropShadow style={styles.shadowProp} >
-            {currentCard.number ?
-                <View style={styles.card} >
-                    <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
-                    <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
-                    <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
-                </View>
-
-                :
-                <View style={styles.startGameContainer} >
-                    <TouchableOpacity style={styles.startGameButton} onPress={() => dispatch(startGame())} ><Text style={styles.startGameText} >Start Game</Text></TouchableOpacity>
-                </View>
-            }
+            <View style={styles.card} >
+                <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
+                <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
+                <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
+            </View>
         </DropShadow >
     )
 }
@@ -43,7 +36,7 @@ const styles = StyleSheet.create({
     card: {
         height: 320,
         width: '70%',
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(249, 249, 249)',
         justifyContent: 'space-between',
         borderRadius: 8,
     },
@@ -87,25 +80,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 25
-    },
-    startGameContainer: {
-        height: 320,
-        width: '70%',
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 8,
-    },
-    startGameButton: {
-        height: 60,
-        width: 180,
-        backgroundColor: 'rgb(228, 70, 67)',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    startGameText: {
-        fontSize: 22
     }
 })
 
