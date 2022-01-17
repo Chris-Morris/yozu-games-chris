@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
-import { LinearGradient } from 'expo-linear-gradient';
 import DropShadow from "react-native-drop-shadow";
 import { AuthContext } from '../../context/authContext';
 
@@ -79,13 +78,18 @@ const SignupScreen = () => {
             ]
         );
 
+    let usernameStyle = styles.input;
+    if (invalidUsername) {
+        usernameStyle = styles.invalidInput;
+    };
+
+    let passwordStyle = styles.input;
+    if (invalidPassword) {
+        passwordStyle = styles.invalidInput;
+    };
+
     return (
         <ScrollView contentContainerStyle={styles.container} >
-            <LinearGradient
-                // Background Linear Gradient
-                colors={['rgba(0,0,0,0.8)', 'transparent']}
-                style={styles.background}
-            />
             <DropShadow style={styles.shadowProps} >
                 <Card containerStyle={styles.card}>
                     <Card.Title>Sign Up</Card.Title>
@@ -117,63 +121,32 @@ const SignupScreen = () => {
                         />
                     </View>
 
-                    {!invalidUsername ?
-                        <View>
-                            <Text>Username</Text>
-                            <Text>(min 5 characters)</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={styles.input}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                            />
-                        </View>
-                        :
-                        <View>
-                            <Text>Username</Text>
-                            <Text>(min 5 characters)</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={styles.invalidInput}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                            />
-                        </View>
-                    }
+                    <View>
+                        <Text>Username</Text>
+                        <Text>(min 5 characters)</Text>
+                        <TextInput
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            clearButtonMode='always'
+                            style={usernameStyle}
+                            placeholder="Username"
+                            value={username}
+                            onChangeText={setUsername}
+                        />
+                    </View>
 
-                    {invalidPassword ?
-                        <View>
-                            <Text>Password</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={styles.invalidInput}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                            />
-                        </View>
-                        :
-                        <View>
-                            <Text>Password</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={styles.input}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                            />
-                        </View>
-                    }
+                    <View>
+                        <Text>Password</Text>
+                        <TextInput
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            clearButtonMode='always'
+                            style={passwordStyle}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                        />
+                    </View>
 
                     {showButton ?
                         <TouchableOpacity style={styles.button} onPress={() => signIn({ username, password })}><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
@@ -190,16 +163,9 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'flex-start',
-        backgroundColor: 'blue',
+        backgroundColor: 'rgb(249, 249, 249)',
         height: 600,
         paddingTop: 40
-    },
-    background: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        height: 400,
     },
     card: {
         height: 400,

@@ -50,80 +50,54 @@ const SigninScreen = () => {
             ]
         );
 
+    let usernameStyle = styles.input;
+    if (invalidUsername) {
+        usernameStyle = styles.invalidInput;
+    };
+
+    let passwordStyle = styles.input;
+    if (invalidPassword) {
+        passwordStyle = styles.invalidInput;
+    };
+
     return (
-        <ScrollView contentContainerStyle={signinStyle.container} >
-            <LinearGradient
-                // Background Linear Gradient
-                colors={['rgba(0,0,0,0.8)', 'transparent']}
-                style={signinStyle.background}
-            />
-            <DropShadow style={signinStyle.shadowProps} >
-                <Card containerStyle={signinStyle.card}>
+        <ScrollView contentContainerStyle={styles.container} >
+            <DropShadow style={styles.shadowProps} >
+                <Card containerStyle={styles.card}>
                     <Card.Title>Sign In</Card.Title>
                     <Card.Divider />
-                    {!invalidUsername ?
-                        <View>
-                            <Text>Please enter your username</Text>
-                            <Text>(min 5 characters)</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.input}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                            />
-                        </View>
-                        :
-                        <View>
-                            <Text>Please enter a valid username</Text>
-                            <Text>(min 5 characters)</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.invalidInput}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                            />
-                        </View>
-                    }
+                    <View>
+                        <Text>Please enter your username</Text>
+                        <Text>(min 5 characters)</Text>
+                        <TextInput
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            clearButtonMode='always'
+                            style={usernameStyle}
+                            placeholder="Username"
+                            value={username}
+                            onChangeText={setUsername}
+                        />
+                    </View>
 
-                    {invalidPassword ?
-                        <View>
-                            <Text>Please enter a valid password</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.invalidInput}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                            />
-                        </View>
-                        :
-                        <View>
-                            <Text>Please enter your password</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.input}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                            />
-                        </View>
-                    }
+                    <View>
+                        <Text>Please enter a valid password</Text>
+                        <TextInput
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            clearButtonMode='always'
+                            style={passwordStyle}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                        />
+                    </View>
+
                     {showButton ?
-                        <TouchableOpacity style={signinStyle.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
                         :
-                        <TouchableOpacity style={signinStyle.inactiveButton} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.inactiveButton} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
                     }
                 </Card>
             </DropShadow>
@@ -131,20 +105,13 @@ const SigninScreen = () => {
     );
 }
 
-const signinStyle = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'flex-start',
-        backgroundColor: 'blue',
+        backgroundColor: 'rgb(249, 249, 249)',
         height: 600,
         paddingTop: 100
-    },
-    background: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        height: 300,
     },
     card: {
         height: 300,

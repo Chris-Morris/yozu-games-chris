@@ -49,7 +49,6 @@ const PlayScreenSlice = createSlice({
                 state.lastCard = state.currentCard;
                 state.currentCard = state.cardStack[0];
             } else {
-                // state.score = 0;
                 state.cardStack = [];
                 state.lastCard = {
                     number: null,

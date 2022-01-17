@@ -12,7 +12,6 @@ import ButtonContainer from '../../components/ButtonContainer';
 const PlayScreen = ({ navigation }) => {
     const [play, setPlay] = useState(false);
     const dispatch = useDispatch();
-    const currentCard = useSelector(state => state.Play.currentCard)
     const endGame = useSelector(state => state.Play.endGame);
     const newHighScore = useSelector(state => state.Play.newHighScore);
 
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     startGameButton: {
-        marginTop: 250,
+        marginTop: 200,
         height: 60,
         width: 180,
         backgroundColor: 'rgb(249, 249, 249)',
