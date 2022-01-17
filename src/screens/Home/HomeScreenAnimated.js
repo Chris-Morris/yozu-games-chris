@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     gameButton: {
         height: 66,
         width: 200,
-        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center'
     },

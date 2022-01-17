@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert 
 import { Card } from 'react-native-elements';
 import DropShadow from "react-native-drop-shadow";
 import { AuthContext } from '../../context/authContext';
+import YozuGames from '../../components/YozuGames';
 
 const SignupScreen = () => {
     const [firstname, setFirstname] = useState('');
@@ -80,81 +81,76 @@ const SignupScreen = () => {
 
     let usernameStyle = styles.input;
     if (invalidUsername) {
-        usernameStyle = styles.invalidInput;
+        usernameStyle = [styles.input, styles.invalidInput];
     };
 
     let passwordStyle = styles.input;
     if (invalidPassword) {
-        passwordStyle = styles.invalidInput;
+        passwordStyle = [styles.input, styles.invalidInput];
     };
 
     return (
         <ScrollView contentContainerStyle={styles.container} >
-            <DropShadow style={styles.shadowProps} >
-                <Card containerStyle={styles.card}>
-                    <Card.Title>Sign Up</Card.Title>
-                    <Card.Divider />
-                    <View>
-                        <Text>First name</Text>
-                        <TextInput
-                            autoCapitalize='sentences'
-                            autoCorrect={false}
-                            clearButtonMode='always'
-                            style={styles.input}
-                            placeholder="First Name"
-                            value={firstname}
-                            onChangeText={setFirstname}
-                        />
-                    </View>
+            <YozuGames />
+            <View>
+                <Text>First name</Text>
+                <TextInput
+                    autoCapitalize='sentences'
+                    autoCorrect={false}
+                    clearButtonMode='always'
+                    style={styles.input}
+                    placeholder="First Name"
+                    value={firstname}
+                    onChangeText={setFirstname}
+                />
+            </View>
 
-                    <View>
-                        <Text>Last name</Text>
-                        <TextInput
-                            autoCapitalize='sentences'
-                            autoCorrect={false}
-                            clearButtonMode='always'
-                            style={styles.input}
-                            placeholder="Last Name"
-                            value={lastname}
-                            onChangeText={setLastname}
-                            secureTextEntry
-                        />
-                    </View>
+            <View>
+                <Text>Last name</Text>
+                <TextInput
+                    autoCapitalize='sentences'
+                    autoCorrect={false}
+                    clearButtonMode='always'
+                    style={styles.input}
+                    placeholder="Last Name"
+                    value={lastname}
+                    onChangeText={setLastname}
+                    secureTextEntry
+                />
+            </View>
 
-                    <View>
-                        <Text>Username</Text>
-                        <Text>(min 5 characters)</Text>
-                        <TextInput
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            clearButtonMode='always'
-                            style={usernameStyle}
-                            placeholder="Username"
-                            value={username}
-                            onChangeText={setUsername}
-                        />
-                    </View>
+            <View>
+                <Text>Username</Text>
+                <Text>(min 5 characters)</Text>
+                <TextInput
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    clearButtonMode='always'
+                    style={usernameStyle}
+                    placeholder="Username"
+                    value={username}
+                    onChangeText={setUsername}
+                />
+            </View>
 
-                    <View>
-                        <Text>Password</Text>
-                        <TextInput
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            clearButtonMode='always'
-                            style={passwordStyle}
-                            placeholder="Password"
-                            value={password}
-                            onChangeText={setPassword}
-                        />
-                    </View>
+            <View>
+                <Text>Password</Text>
+                <TextInput
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    clearButtonMode='always'
+                    style={passwordStyle}
+                    placeholder="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                />
+            </View>
 
-                    {showButton ?
-                        <TouchableOpacity style={styles.button} onPress={() => signIn({ username, password })}><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
-                        :
-                        <TouchableOpacity style={styles.inactiveButton} onPress={signupError} ><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
-                    }
-                </Card>
-            </DropShadow>
+            {showButton ?
+                <TouchableOpacity style={styles.button} onPress={() => signIn({ username, password })}><Text style={{ color: 'white', fontSize: 20 }} >Sign Up</Text></TouchableOpacity>
+                :
+                <TouchableOpacity style={[styles.button, styles.inactiveButton]} onPress={signupError} ><Text style={{ color: 'white', fontSize: 20 }} >Sign Up</Text></TouchableOpacity>
+            }
         </ScrollView>
     );
 }
@@ -166,19 +162,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(249, 249, 249)',
         height: 600,
         paddingTop: 40
-    },
-    card: {
-        height: 400,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderRadius: 5
-    },
-    shadowProps: {
-        shadowColor: '#171717',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.4,
-        shadowRadius: 2
     },
     input: {
         height: 30,
@@ -192,33 +175,17 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     invalidInput: {
-        height: 30,
-        width: 200,
-        backgroundColor: 'rgb(236, 240, 246)',
-        borderStyle: 'solid',
-        borderColor: 'rgb(255, 2, 2)',
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingLeft: 10,
-        marginBottom: 10
+        borderColor: 'rgb(255, 2, 2)'
     },
     button: {
         backgroundColor: 'rgb(0, 122, 204)',
-        height: 30,
-        width: 124,
-        borderRadius: 5,
+        height: 50,
+        width: 200,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 35
+        alignItems: 'center'
     },
     inactiveButton: {
-        backgroundColor: 'rgb(51, 51, 51)',
-        height: 30,
-        width: 124,
-        borderRadius: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 35
+        backgroundColor: 'rgb(51, 51, 51)'
     }
 });
 

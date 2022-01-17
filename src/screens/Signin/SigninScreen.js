@@ -90,9 +90,9 @@ const SigninScreen = () => {
             </View>
 
             {showButton ?
-                <TouchableOpacity style={styles.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'black', fontSize: 20 }} >Sign In</Text></TouchableOpacity>
                 :
-                <TouchableOpacity style={[styles.button, styles.inactiveButton]} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
+                <TouchableOpacity style={[styles.button, styles.inactiveButton]} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white', fontSize: 20 }} >Sign In</Text></TouchableOpacity>
             }
         </ScrollView >
     );
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         paddingTop: 100
     },
     input: {
-        height: 30,
+        height: 35,
         width: 200,
         backgroundColor: 'rgb(236, 240, 246)',
         borderStyle: 'solid',
@@ -122,12 +122,10 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: 'rgb(0, 122, 204)',
-        height: 30,
-        width: 124,
-        borderRadius: 5,
+        height: 50,
+        width: 200,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 35
+        alignItems: 'center'
     },
     inactiveButton: {
         backgroundColor: 'rgb(51, 51, 51)'

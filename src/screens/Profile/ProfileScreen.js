@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
         width: 200,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'red',
-        borderRadius: 5
+        backgroundColor: 'red'
     },
     signout: {
         color: 'black',
