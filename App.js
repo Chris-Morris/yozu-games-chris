@@ -19,6 +19,7 @@ import StatsScreen from './src/screens/Stats/StatsScreen';
 import AwardsScreen from './src/screens/Awards/AwardsScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
 import EndGameScreen from './src/screens/EndGame/EndGameScreen';
+import HomeScreenAnimated from './src/screens/Home/HomeScreenAnimated';
 
 // Context
 import { AuthContext } from './src/context/authContext';
@@ -35,7 +36,7 @@ const GameStack = createNativeStackNavigator();
 function HomeTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }} >
-      <Tab.Screen name="Home" component={HomeScreen} options={{
+      <Tab.Screen name="Home" component={HomeScreenAnimated} options={{
         tabBarLabel: 'GAMES',
         tabBarIcon: ({ color, size }) => (
           <Material name="dice-5-outline" color={color} size={size} />
@@ -64,36 +65,36 @@ function HomeTabs() {
 }
 
 export default () => {
-  const dispatch = useDispatch();
-  // const [authState, dispatch] = useReducer(
-  //   (prevState, action) => {
-  //     switch (action.type) {
-  //       case 'RESTORE_TOKEN':
-  //         return {
-  //           ...prevState,
-  //           userToken: action.token,
-  //           isLoading: false
-  //         };
-  //       case 'SIGN_IN':
-  //         return {
-  //           ...prevState,
-  //           isSignout: false,
-  //           userToken: action.token
-  //         };
-  //       case 'SIGN_OUT':
-  //         return {
-  //           ...prevState,
-  //           isSignout: true,
-  //           userToken: null
-  //         };
-  //     }
-  //   },
-  //   {
-  //     isLoading: true,
-  //     isSignout: false,
-  //     userToken: null
-  //   }
-  // );
+  // const dispatch = useDispatch();
+  const [authState, dispatch] = useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null
+    }
+  );
 
   useEffect(() => {
     const bootstrapAsync = async () => {
@@ -105,7 +106,7 @@ export default () => {
         console.log(e);
       };
 
-      dispatch(restoreToken(userToken));
+      dispatch({ type: 'RESTORE_TOKEN', token: 'dummy_token' });
     };
 
     bootstrapAsync();
