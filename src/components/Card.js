@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
-import { startGame } from '../screens/Play/PlayScreenSlice';
 
 const Card = () => {
     // Selectors
@@ -25,8 +24,8 @@ const Card = () => {
         <DropShadow style={styles.shadowProp} >
             <View style={styles.card} >
                 <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
-                <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
-                <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
+                <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{currentCard.number}</Text></View>
+                <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /></View>
             </View>
         </DropShadow >
     )

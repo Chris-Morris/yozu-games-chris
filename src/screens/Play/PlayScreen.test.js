@@ -16,8 +16,17 @@ describe('PlayScreen', () => {
             </Provider>
         );
 
-        const { getByText } = render(component);
+        const { getByText, queryByTestId, debug } = render(component);
+
         const button = getByText(/start game/i);
         expect(button).toBeDefined();
+        debug();
+        console.log("Game Started...");
+        fireEvent.press(button);
+        debug();
+
+        const cards = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
+        const cardNumber = queryByTestId('cardNumber');
+        expect(cards).toContain(cardNumber.props.children);
     });
 });
