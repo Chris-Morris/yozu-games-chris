@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { guess } from '../screens/Play/PlayScreenSlice';
 
-const Button = ({ title, pressed, role }) => {
+const Button = ({ title, style, role }) => {
     const dispatch = useDispatch();
 
     const handleGuess = (direction) => {
@@ -13,13 +13,13 @@ const Button = ({ title, pressed, role }) => {
     if (role === 'increment') {
         return (
             <>
-                <TouchableOpacity style={pressed} onPress={() => handleGuess('higher')} ><Text style={styles.text} >{title}</Text></TouchableOpacity>
+                <TouchableOpacity style={style} onPress={() => handleGuess('higher')} ><Text style={styles.text} >{title}</Text></TouchableOpacity>
             </>
         )
     } else if (role === 'decrement') {
         return (
             <>
-                <TouchableOpacity style={pressed} onPress={() => handleGuess('lower')} ><Text style={styles.text} >{title}</Text></TouchableOpacity>
+                <TouchableOpacity style={style} onPress={() => handleGuess('lower')} ><Text style={styles.text} >{title}</Text></TouchableOpacity>
             </>
         )
     }
