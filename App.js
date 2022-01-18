@@ -64,7 +64,7 @@ function HomeTabs() {
   )
 }
 
-export default () => {
+const App = () => {
   // const dispatch = useDispatch();
   const [authState, dispatch] = useReducer(
     (prevState, action) => {
@@ -162,3 +162,5 @@ export default () => {
     </Provider>
   );
 }
+
+export default App;

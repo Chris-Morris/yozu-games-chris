@@ -41,23 +41,23 @@ describe('PlayScreen', () => {
 
     test('Card updates as Higher or Lower buttons are pressed', async () => {
 
-        const button = getByText(/start game/i);
+        const button = await getByText(/start game/i);
         fireEvent.press(button);
 
         debug();
-        const cardNumber = queryByTestId('cardNumber');
+        const cardNumber = await queryByTestId('cardNumber');
 
 
-        const higher = getByText(/higher/i);
+        const higher = await getByText(/higher/i);
         await fireEvent.press(higher);
 
         debug();
 
-        const lower = getByText(/lower/i);
+        const lower = await getByText(/lower/i);
         fireEvent.press(lower);
 
         const cards = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
-        const newCardNumber = queryByTestId('cardNumber');
+        const newCardNumber = await queryByTestId('cardNumber');
         console.log('Original card', cardNumber.props)
         console.log('New card', newCardNumber.props)
         expect(cards).toContain(newCardNumber.props.children);

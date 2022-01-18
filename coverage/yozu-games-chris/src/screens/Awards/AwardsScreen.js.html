@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/Stats.js</title>
+    <title>Code coverage report for yozu-games-chris/src/screens/Awards/AwardsScreen.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> Stats.js</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">yozu-games-chris/src/screens/Awards</a> AwardsScreen.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -99,27 +99,19 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,26 +136,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import { useSelector } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import YozuGames from '../../components/YozuGames';
 &nbsp;
-import Stat from './Stat';
-&nbsp;
-const Stats = () =&gt; {
-    const score = useSelector(state =&gt; state.Play.score)
-    const highScore = useSelector(state =&gt; state.Play.highScore)
-    const lastCard = useSelector(state =&gt; state.Play.lastCard)
-&nbsp;
-    let lastCardNumber = 0;
-    if (lastCard.number) {
-        lastCardNumber = lastCard.number;
-    }
-&nbsp;
-    return (
-        &lt;View style={styles.container} &gt;
-            &lt;Stat statName={"High Score"} statNumber={highScore} /&gt;
-            &lt;Stat statName={"Score"} statNumber={score} /&gt;
-            &lt;Stat statName={"Last Card"} statNumber={lastCardNumber} icon={lastCard.suit} /&gt;
+const AwardsScreen = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    return (</span>
+        &lt;View style={styles.container}&gt;
+            &lt;View style={styles.yozuContainer} &gt;
+                &lt;YozuGames /&gt;
+            &lt;/View&gt;
+            &lt;Text&gt;Awards&lt;/Text&gt;
+            {/* &lt;View style={styles.gameContainer} &gt;
+                &lt;Animated.View style={{ transform: [{ translateY: animatedBox1 }] }} &gt;&lt;TouchableOpacity style={[styles.gameButton, styles.higherLower]} onPress={() =&gt; navigation.navigate('Play')} &gt;&lt;Text style={styles.buttonText} &gt;Higher or Lower&lt;/Text&gt;&lt;/TouchableOpacity&gt;&lt;/Animated.View&gt;
+                &lt;Animated.View style={{ transform: [{ translateY: animatedBox2 }] }} &gt;&lt;TouchableOpacity style={[styles.gameButton, styles.simonSays]} onPress={() =&gt; alert('Sorry, Simon Says is currently in development.')} &gt;&lt;Text style={styles.buttonText} &gt;Simon Says&lt;/Text&gt;&lt;/TouchableOpacity&gt;&lt;/Animated.View&gt;
+                &lt;Animated.View style={{ transform: [{ translateY: animatedBox3 }] }} &gt;&lt;TouchableOpacity style={[styles.gameButton, styles.memory]} onPress={() =&gt; alert('Sorry, Memory is currently in development.')} &gt;&lt;Text style={styles.buttonText} &gt;Memory&lt;/Text&gt;&lt;/TouchableOpacity&gt;&lt;/Animated.View&gt;
+                &lt;Animated.View style={{ transform: [{ translateY: animatedBox4 }] }} &gt;&lt;TouchableOpacity style={[styles.gameButton, styles.countdownLetters]} onPress={() =&gt; alert('Sorry, Countdown Letters is currently in development.')} &gt;&lt;Text style={styles.buttonText} &gt;Countdown Letters&lt;/Text&gt;&lt;/TouchableOpacity&gt;&lt;/Animated.View&gt;
+            &lt;/View&gt; */}
         &lt;/View&gt;
     )
 }
@@ -171,18 +159,18 @@ const Stats = () =&gt; {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
-        alignSelf: 'stretch',
-        paddingHorizontal: 30
+        paddingVertical: 30
     },
-    text: {
-        color: 'white'
-    }
+    yozuContainer: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center'
+    },
 })
 &nbsp;
-export default Stats
+export default AwardsScreen
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -190,16 +178,16 @@ export default Stats
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jan 18 2022 11:14:22 GMT+0000 (Greenwich Mean Time)
+                at Tue Jan 18 2022 16:29:18 GMT+0000 (Greenwich Mean Time)
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../../../sorter.js"></script>
+        <script src="../../../../block-navigation.js"></script>
     </body>
 </html>
     

@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { resetHighScore, resetGame } from '../Play/PlayScreenSlice';

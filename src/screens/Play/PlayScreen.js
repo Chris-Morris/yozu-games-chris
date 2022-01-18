@@ -15,7 +15,7 @@ const PlayScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const endGame = useSelector(state => state.Play.endGame);
     const newHighScore = useSelector(state => state.Play.newHighScore);
-    const highScore = useSelector(state => state.Play.highScore)
+    const highScore = useSelector(state => state.Play.highScore);
 
     useFocusEffect(
         useCallback(() => {
