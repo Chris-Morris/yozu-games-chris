@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Button from './Button';
+import { useDispatch } from 'react-redux';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { guess } from '../screens/Play/PlayScreenSlice';
 
 const ButtonContainer = () => {
-    const [lowerButtonActive, setLowerButtonActive] = useState(false);
-    const [higherButtonActive, setHigherButtonActive] = useState(false);
+    const dispatch = useDispatch();
+    const [lowerButtonStyle, setLowerButtonStyle] = useState([styles.button, styles.inactive]);
+    const [higherButtonStyle, setHigherButtonStyle] = useState([styles.button, styles.inactive]);
+    const [lowerButtonTextStyle, setLowerButtonTextStyle] = useState([styles.text, styles.inactiveText]);
+    const [higherButtonTextStyle, setHigherButtonTextStyle] = useState([styles.text, styles.inactiveText]);
 
-    let lowerButtonStyle;
-    let higherButtonStyle;
-    if (lowerButtonActive) {
-        lowerButtonStyle = [styles.button, styles.active];
-        higherButtonStyle = [styles.button, styles.inactive];
-    } else if (higherButtonActive) {
-        lowerButtonStyle = [styles.button, styles.inactive];
-        higherButtonStyle = [styles.button, styles.active];
-    };
+    const handleGuess = (direction) => {
+        dispatch(guess(direction));
+
+        if (direction === 'lower') {
+            setLowerButtonStyle([styles.button, styles.active]);
+            setHigherButtonStyle([styles.button, styles.inactive]);
+            setLowerButtonTextStyle([styles.text, styles.activeText]);
+            setHigherButtonTextStyle([styles.text, styles.inactiveText]);
+        } else if (direction === 'higher') {
+            setLowerButtonStyle([styles.button, styles.inactive]);
+            setHigherButtonStyle([styles.button, styles.active]);
+            setLowerButtonTextStyle([styles.text, styles.inactiveText]);
+            setHigherButtonTextStyle([styles.text, styles.activeText]);
+        }
+    }
 
     return (
         <View style={styles.container} >
-            <Button title="Lower" style={lowerButtonStyle} role={'decrement'} handleClick={setLowerButtonActive} />
-            <Button title="Higher" style={higherButtonStyle} role={'increment'} handleClick={setHigherButtonActive} />
+            <TouchableOpacity style={lowerButtonStyle} onPress={() => handleGuess('lower')} ><Text style={lowerButtonTextStyle} >Lower</Text></TouchableOpacity>
+            <TouchableOpacity style={higherButtonStyle} onPress={() => handleGuess('higher')} ><Text style={higherButtonTextStyle} >Higher</Text></TouchableOpacity>
         </View>
     )
 };
@@ -41,6 +51,15 @@ const styles = StyleSheet.create({
     },
     inactive: {
         backgroundColor: 'rgb(245, 106, 104)',
+        color: 'rgb(249, 249, 249)'
+    },
+    text: {
+        fontSize: 16
+    },
+    activeText: {
+        color: 'rgb(245, 106, 104)'
+    },
+    inactiveText: {
         color: 'rgb(249, 249, 249)'
     }
 })
