@@ -69,7 +69,9 @@ const HomeScreenAnimated = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <YozuGames />
+            <View style={styles.yozuContainer} >
+                <YozuGames />
+            </View>
             <View style={styles.gameContainer} >
                 <Animated.View style={{ transform: [{ translateY: animatedBox1 }] }} ><TouchableOpacity style={[styles.gameButton, styles.higherLower]} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity></Animated.View>
                 <Animated.View style={{ transform: [{ translateY: animatedBox2 }] }} ><TouchableOpacity style={[styles.gameButton, styles.simonSays]} onPress={() => alert('Sorry, Simon Says is currently in development.')} ><Text style={styles.buttonText} >Simon Says</Text></TouchableOpacity></Animated.View>
@@ -91,8 +93,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
-        justifyContent: 'space-between',
         paddingVertical: 30
+    },
+    yozuContainer: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center'
     },
     gameContainer: {
         height: 320,

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.21% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/19</span>
+                <span class='fraction'>18/21</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>15/18</span>
             </div>
         
             
@@ -148,7 +148,18 @@
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,6 +175,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,6 +198,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -211,6 +226,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,6 +258,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { startGame } from './PlayScreenSlice';
+import Stat from '../../components/Stat';
 &nbsp;
 // Import Components
 import Stats from '../../components/Stats';
@@ -249,6 +270,7 @@ const PlayScreen = ({ navigation }) =&gt; {
     const dispatch = useDispatch();
     const endGame = useSelector(state =&gt; state.Play.endGame);
     const newHighScore = useSelector(state =&gt; state.Play.newHighScore);
+    const highScore = useSelector(state =&gt; state.Play.highScore)
 &nbsp;
     useFocusEffect(
         useCallback(() =&gt; {
@@ -288,7 +310,10 @@ const PlayScreen = ({ navigation }) =&gt; {
                     &lt;ButtonContainer /&gt;
                 &lt;/&gt;
             ) : (
-                &lt;TouchableOpacity style={styles.startGameButton} onPress={handleStartPlay} &gt;&lt;Text style={styles.startGameText} &gt;Start Game&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+                &lt;View style={styles.startGameContainer} &gt;
+                    &lt;Stat statName={"High Score"} statNumber={highScore} /&gt;
+                    &lt;TouchableOpacity style={styles.startGameButton} onPress={handleStartPlay} &gt;&lt;Text style={styles.startGameText} &gt;Start Game&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+                &lt;/View&gt;
             )
             }
         &lt;/View&gt;
@@ -303,8 +328,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: 10
     },
+    startGameContainer: {
+        height: 200,
+        marginTop: 100,
+        justifyContent: 'space-between'
+    },
     startGameButton: {
-        marginTop: 200,
+        // marginTop: 200,
         height: 60,
         width: 180,
         backgroundColor: 'rgb(249, 249, 249)',
@@ -325,7 +355,7 @@ export default PlayScreen;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jan 18 2022 09:55:43 GMT+0000 (Greenwich Mean Time)
+                at Tue Jan 18 2022 10:34:51 GMT+0000 (Greenwich Mean Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

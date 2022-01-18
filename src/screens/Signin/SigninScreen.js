@@ -60,7 +60,9 @@ const SigninScreen = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.container} >
-            <YozuGames />
+            <View style={styles.yozuContainer} >
+                <YozuGames />
+            </View>
             <View>
                 <Text>Please enter your username</Text>
                 <Text>(min 5 characters)</Text>
@@ -100,11 +102,15 @@ const SigninScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        flex: 1,
         backgroundColor: 'rgb(249, 249, 249)',
-        height: 600,
-        paddingTop: 100
+        alignItems: 'center',
+        paddingVertical: 30
+    },
+    yozuContainer: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center'
     },
     input: {
         height: 35,

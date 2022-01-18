@@ -5,7 +5,9 @@ import YozuGames from '../../components/YozuGames';
 const AwardsScreen = () => {
     return (
         <View style={styles.container}>
-            <YozuGames />
+            <View style={styles.yozuContainer} >
+                <YozuGames />
+            </View>
             <Text>Awards</Text>
             {/* <View style={styles.gameContainer} >
                 <Animated.View style={{ transform: [{ translateY: animatedBox1 }] }} ><TouchableOpacity style={[styles.gameButton, styles.higherLower]} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity></Animated.View>
@@ -21,9 +23,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'rgb(249, 249, 249)',
-        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 30
+    },
+    yozuContainer: {
+        height: 100,
+        width: '100%',
         alignItems: 'center'
-    }
+    },
 })
 
 export default AwardsScreen

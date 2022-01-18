@@ -3,6 +3,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { startGame } from './PlayScreenSlice';
+import Stat from '../../components/Stat';
 
 // Import Components
 import Stats from '../../components/Stats';
@@ -14,6 +15,7 @@ const PlayScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const endGame = useSelector(state => state.Play.endGame);
     const newHighScore = useSelector(state => state.Play.newHighScore);
+    const highScore = useSelector(state => state.Play.highScore)
 
     useFocusEffect(
         useCallback(() => {
@@ -53,7 +55,10 @@ const PlayScreen = ({ navigation }) => {
                     <ButtonContainer />
                 </>
             ) : (
-                <TouchableOpacity style={styles.startGameButton} onPress={handleStartPlay} ><Text style={styles.startGameText} >Start Game</Text></TouchableOpacity>
+                <View style={styles.startGameContainer} >
+                    <Stat statName={"High Score"} statNumber={highScore} />
+                    <TouchableOpacity style={styles.startGameButton} onPress={handleStartPlay} ><Text style={styles.startGameText} >Start Game</Text></TouchableOpacity>
+                </View>
             )
             }
         </View>
@@ -68,8 +73,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: 10
     },
+    startGameContainer: {
+        height: 200,
+        marginTop: 100,
+        justifyContent: 'space-between'
+    },
     startGameButton: {
-        marginTop: 200,
+        // marginTop: 200,
         height: 60,
         width: 180,
         backgroundColor: 'rgb(249, 249, 249)',

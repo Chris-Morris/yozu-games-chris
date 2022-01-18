@@ -9,7 +9,9 @@ const ProfileScreen = () => {
 
     return (
         <View style={styles.container}>
-            <YozuGames />
+            <View style={styles.yozuContainer} >
+                <YozuGames />
+            </View>
             <TouchableOpacity style={styles.signoutButton} onPress={() => signOut()}><Text style={styles.signout} >Sign Out</Text></TouchableOpacity>
         </View>
     )
@@ -20,7 +22,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
-        justifyContent: 'center'
+        paddingVertical: 30
+    },
+    yozuContainer: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center'
     },
     signoutButton: {
         height: 66,
