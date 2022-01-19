@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text, Animated } from 'react-native';
-import { startGame, setCurrentCard, setLastCard, setEndGame } from './PlayScreenSlice';
+import { startGame, setEndGame } from './PlayScreenSlice';
 import Stat from '../../components/Stat';
 
 // Import Components
@@ -19,9 +19,6 @@ const PlayScreen = ({ navigation }) => {
     // Deck State
     const deck = useSelector(state => state.Play.cardDeck);
     const turn = useSelector(state => state.Play.turn);
-    const [localTurn, setLocalTurn] = useState(0);
-    console.log('Turn: ', turn);
-    console.log('Local Turn: ', localTurn);
 
     useFocusEffect(
         useCallback(() => {
@@ -31,7 +28,6 @@ const PlayScreen = ({ navigation }) => {
     )
 
     const handleStartPlay = () => {
-        setLocalTurn(0);
         setPlay(true);
         dispatch(startGame());
     };
@@ -47,7 +43,7 @@ const PlayScreen = ({ navigation }) => {
                 useNativeDriver: true
             }
         ).start(() => {
-            if (turn === 8) {
+            if (deck.length <= 1) {
                 setEndGame(true);
                 setTimeout(() => {
                     if (newHighScore) {
@@ -60,22 +56,6 @@ const PlayScreen = ({ navigation }) => {
         })
     }
 
-    if (turn > localTurn) {
-
-        if (turn === 0) {
-            dispatch(setCurrentCard(deck[turn]));
-            console.log('Current Card: ', deck[turn])
-        } else {
-            dispatch(setLastCard(deck[localTurn]));
-            dispatch(setCurrentCard(deck[turn]));
-            console.log('Last Card: ', deck[localTurn])
-            console.log('Current Card: ', deck[turn])
-        }
-
-        setLocalTurn(turn);
-        // animate();
-    }
-
     return (
         <View style={styles.container}>
             {play ? (
@@ -84,13 +64,13 @@ const PlayScreen = ({ navigation }) => {
                     <View
                         style={styles.deckContainer}
                     />
-                    <View style={styles.cardDeck} >
+                    <View style={styles.deck} >
                         {deck.map((card, i) => {
-                            // if (i < localTurn) {
-                            //     return null
-                            // };
+                            if (i < turn) {
+                                return null;
+                            };
 
-                            if (i === localTurn) {
+                            if (i === turn) {
                                 return (
                                     <Animated.View key={i} style={{ transform: [{ translateX: topCard }] }}>
                                         <Card card={card} />
@@ -98,14 +78,14 @@ const PlayScreen = ({ navigation }) => {
                                 )
                             }
 
-                            if (i > localTurn) {
+                            if (i > turn) {
                                 return (
                                     <Card key={i} card={card} />
                                 )
                             }
                         }).reverse()}
                     </View>
-                    {turn < 8 ?
+                    {deck.length > 1 ?
                         <ButtonContainer animate={animate} />
                         :
                         <Text style={styles.gameComplete} >Let's see how you did!</Text>
@@ -154,7 +134,7 @@ const styles = StyleSheet.create({
         width: '70%',
         marginBottom: 15
     },
-    cardDeck: {
+    deck: {
         position: 'absolute',
         top: 250,
         width: '100%',

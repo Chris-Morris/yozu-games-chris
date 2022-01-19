@@ -40,8 +40,8 @@ const initiateGame = (state) => {
         number: null,
         suit: ''
     };
-    state.turn = 0,
-        state.score = 0;
+    state.turn = 0;
+    state.score = 0;
     state.gameStarted = true
 }
 
@@ -53,10 +53,11 @@ const PlayScreenSlice = createSlice({
             initiateGame(state);
         },
         guess: (state, action) => {
-            state.turn++
+            state.turn++;
 
-            state.currentCard = state.cardDeck[state.turn];
-            state.lastCard = state.cardDeck[state.turn - 1];
+            state.lastCard = state.cardDeck[state.cardDeck.length - 1];
+            state.cardDeck.splice(state.cardDeck.length - 1, 1);
+            state.currentCard = state.cardDeck[state.cardDeck.length - 1];
 
             if (action.payload === 'higher') {
                 if (numbers.indexOf(state.currentCard.number) > numbers.indexOf(state.lastCard.number)) {
@@ -73,17 +74,10 @@ const PlayScreenSlice = createSlice({
                 state.newHighScore = true;
             };
         },
-        setCurrentCard: (state, action) => {
-            state.currentCard = action.payload;
-        },
-        setLastCard: (state, action) => {
-            state.lastCard = action.payload;
-        },
         setEndGame: (state, action) => {
             state.gameStarted = false;
             state.endGame = action.payload;
             state.cardDeck = [];
-            state.turn = 0;
         },
         resetGame: (state) => {
             state.cardDeck = [];
@@ -97,7 +91,6 @@ const PlayScreenSlice = createSlice({
             };
             state.cardDeck = [];
             state.score = 0;
-            state.turn = 0;
         },
         resetHighScore: (state) => {
             state.highScore = 0;
@@ -114,5 +107,5 @@ export const selectHighScore = state => state.highScore;
 export const selectCurrentCard = state => state.currentCard;
 export const selectLastCard = state => state.lastCard;
 
-export const { startGame, guess, setTurn, setCurrentCard, setLastCard, setEndGame, resetGame, resetHighScore, resetNewHighScore } = PlayScreenSlice.actions;
+export const { startGame, guess, setEndGame, resetGame, resetHighScore, resetNewHighScore } = PlayScreenSlice.actions;
 export default PlayScreenSlice.reducer;
