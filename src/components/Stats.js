@@ -26,6 +26,9 @@ const Stats = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        position: 'absolute',
+        top: 10,
+        left: 50,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

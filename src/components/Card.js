@@ -1,31 +1,27 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
 
-const Card = () => {
-    // Selectors
-    const currentCard = useSelector(state => state.Play.currentCard)
+const Card = ({ card }) => {
 
     let color = 'red'
     const size = 30
-    if (currentCard) {
-        if (currentCard.suit == 'club' || currentCard.suit == 'spade') {
+    if (card) {
+        if (card.suit == 'club' || card.suit == 'spade') {
             color = 'black';
         } else {
             color = 'red'
         };
     };
 
-    const dispatch = useDispatch();
-
     return (
         <DropShadow style={styles.shadowProp} >
             <View style={styles.card} >
-                <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
-                <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{currentCard.number}</Text></View>
-                <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /></View>
+                <View style={styles.topImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} /></View>
+                <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{card.number}</Text></View>
+                <View style={styles.bottomImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /></View>
             </View>
         </DropShadow >
     )
@@ -33,6 +29,7 @@ const Card = () => {
 
 const styles = StyleSheet.create({
     card: {
+        position: 'absolute',
         height: 320,
         width: '70%',
         backgroundColor: 'rgb(249, 249, 249)',
@@ -78,7 +75,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 25
+        marginTop: 10
     }
 })
 

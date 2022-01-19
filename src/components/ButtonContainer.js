@@ -36,6 +36,8 @@ const ButtonContainer = () => {
 
 const styles = StyleSheet.create({
     container: {
+        position: 'absolute',
+        bottom: 0,
         flexDirection: 'row',
         height: 60,
         alignSelf: 'stretch'
