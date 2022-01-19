@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
 
 const initialState = {
-    turn: -1,
+    turn: 0,
     score: 0,
     highScore: 0,
     newHighScore: false,
+    cardDeck: [],
     currentCard: {
         number: null,
         suit: ''
@@ -19,6 +20,18 @@ const initialState = {
 }
 
 const initiateGame = (state) => {
+    const suits = ['heart', 'diamond', 'spade', 'club'];
+    const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
+    for (let i = 0; i < 10; i++) {
+        const suitIndex = Math.floor(Math.random() * (suits.length - 0) + 0);
+        const suit = suits[suitIndex];
+
+        const numberIndex = Math.floor(Math.random() * (numbers.length - 0) + 0);
+        const number = numbers[numberIndex];
+
+        state.cardDeck.push({ suit, number });
+    }
+
     state.currentCard = {
         number: null,
         suit: ''
@@ -27,7 +40,7 @@ const initiateGame = (state) => {
         number: null,
         suit: ''
     };
-    state.turn = -1,
+    state.turn = 0,
         state.score = 0;
     state.gameStarted = true
 }
@@ -41,6 +54,9 @@ const PlayScreenSlice = createSlice({
         },
         guess: (state, action) => {
             state.turn++
+
+            state.currentCard = state.cardDeck[state.turn];
+            state.lastCard = state.cardDeck[state.turn - 1];
 
             if (action.payload === 'higher') {
                 if (numbers.indexOf(state.currentCard.number) > numbers.indexOf(state.lastCard.number)) {
@@ -57,14 +73,20 @@ const PlayScreenSlice = createSlice({
                 state.newHighScore = true;
             };
         },
-        setlastCard: (state, action) => {
+        setCurrentCard: (state, action) => {
+            state.currentCard = action.payload;
+        },
+        setLastCard: (state, action) => {
             state.lastCard = action.payload;
         },
         setEndGame: (state, action) => {
             state.gameStarted = false;
             state.endGame = action.payload;
+            state.cardDeck = [];
+            state.turn = 0;
         },
         resetGame: (state) => {
+            state.cardDeck = [];
             state.currentCard = {
                 number: null,
                 suit: ''
@@ -73,8 +95,9 @@ const PlayScreenSlice = createSlice({
                 number: null,
                 suit: ''
             };
+            state.cardDeck = [];
             state.score = 0;
-            state.turn = -1;
+            state.turn = 0;
         },
         resetHighScore: (state) => {
             state.highScore = 0;
@@ -91,5 +114,5 @@ export const selectHighScore = state => state.highScore;
 export const selectCurrentCard = state => state.currentCard;
 export const selectLastCard = state => state.lastCard;
 
-export const { startGame, guess, setTurn, setLastCard, setEndGame, resetGame, resetHighScore, resetNewHighScore } = PlayScreenSlice.actions;
+export const { startGame, guess, setTurn, setCurrentCard, setLastCard, setEndGame, resetGame, resetHighScore, resetNewHighScore } = PlayScreenSlice.actions;
 export default PlayScreenSlice.reducer;

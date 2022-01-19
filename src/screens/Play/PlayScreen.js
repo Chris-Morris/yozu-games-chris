@@ -1,10 +1,9 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text, Animated } from 'react-native';
-import { startGame, setTurn, setLastCard, setEndGame } from './PlayScreenSlice';
+import { startGame, setCurrentCard, setLastCard, setEndGame } from './PlayScreenSlice';
 import Stat from '../../components/Stat';
-// import suitsArray from './suitsArray';
 
 // Import Components
 import Stats from '../../components/Stats';
@@ -12,46 +11,29 @@ import Card from '../../components/Card';
 import ButtonContainer from '../../components/ButtonContainer';
 
 const PlayScreen = ({ navigation }) => {
-    const [index, setIndex] = useState(1);
+    const [play, setPlay] = useState(false);
     const dispatch = useDispatch();
     const newHighScore = useSelector(state => state.Play.newHighScore);
     const highScore = useSelector(state => state.Play.highScore);
 
     // Deck State
-    let deck = [];
+    const deck = useSelector(state => state.Play.cardDeck);
     const turn = useSelector(state => state.Play.turn);
-    const gameStarted = useSelector(state => state.Play.gameStarted);
-    const [localTurn, setLocalTurn] = useState(-1);
-    console.log('Index Start: ', index);
+    const [localTurn, setLocalTurn] = useState(0);
     console.log('Turn: ', turn);
     console.log('Local Turn: ', localTurn);
-    console.log(deck);
 
-    const suits = ['heart', 'diamond', 'spade', 'club'];
-    const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
-    for (let i = 0; i < 10; i++) {
-        const suitIndex = Math.floor(Math.random() * (suits.length - 0) + 0);
-        const suit = suits[suitIndex];
-
-        const numberIndex = Math.floor(Math.random() * (numbers.length - 0) + 0);
-        const number = numbers[numberIndex];
-
-        deck.push({ suit, number, id: i });
-    }
+    useFocusEffect(
+        useCallback(() => {
+            dispatch(setEndGame(true));
+            setPlay(false);
+        }, [])
+    )
 
     const handleStartPlay = () => {
+        setLocalTurn(0);
+        setPlay(true);
         dispatch(startGame());
-        console.log('Game Started');
-    };
-
-    if (turn > 10) {
-        setTimeout(() => {
-            if (newHighScore) {
-                navigation.navigate('EndGame', { destination: "Won" });
-            } else {
-                navigation.navigate('EndGame', { destination: "Lost" });
-            };
-        }, 1000);
     };
 
     const topCard = useRef(new Animated.Value(0)).current;
@@ -65,12 +47,7 @@ const PlayScreen = ({ navigation }) => {
                 useNativeDriver: true
             }
         ).start(() => {
-            setIndex(index + 1);
-            console.log('Deck Length: ', deck.length)
-            console.log('Index after animation: ', index);
-            if (turn === 10) {
-                console.log('End Game');
-                setLocalTurn(-1);
+            if (turn === 8) {
                 setEndGame(true);
                 setTimeout(() => {
                     if (newHighScore) {
@@ -84,13 +61,24 @@ const PlayScreen = ({ navigation }) => {
     }
 
     if (turn > localTurn) {
+
+        if (turn === 0) {
+            dispatch(setCurrentCard(deck[turn]));
+            console.log('Current Card: ', deck[turn])
+        } else {
+            dispatch(setLastCard(deck[localTurn]));
+            dispatch(setCurrentCard(deck[turn]));
+            console.log('Last Card: ', deck[localTurn])
+            console.log('Current Card: ', deck[turn])
+        }
+
         setLocalTurn(turn);
         animate();
     }
 
     return (
         <View style={styles.container}>
-            {gameStarted ? (
+            {play ? (
                 <>
                     <Stats />
                     <View
@@ -98,26 +86,31 @@ const PlayScreen = ({ navigation }) => {
                     />
                     <View style={styles.cardDeck} >
                         {deck.map((card, i) => {
-                            if (i < turn) {
-                                return null
-                            };
+                            // if (i < localTurn) {
+                            //     return null
+                            // };
 
-                            if (i === turn) {
+                            if (i === localTurn) {
                                 return (
-                                    <Animated.View key={card.id} style={{ transform: [{ translateX: topCard }] }}>
+                                    <Animated.View key={i} style={{ transform: [{ translateX: topCard }] }}>
                                         <Card card={card} />
                                     </Animated.View>
                                 )
                             }
 
-                            if (i > turn) {
+                            if (i > localTurn) {
                                 return (
-                                    <Card key={card.id} card={card} />
+                                    <Card key={i} card={card} />
                                 )
                             }
                         }).reverse()}
                     </View>
-                    <ButtonContainer />
+                    {turn < 8 ?
+                        <ButtonContainer />
+                        :
+                        <Text style={styles.gameComplete} >Let's see how you did!</Text>
+                    }
+
                 </>
             ) : (
                 <View style={styles.startGameContainer} >
@@ -166,6 +159,11 @@ const styles = StyleSheet.create({
         top: 250,
         width: '100%',
         zIndex: -1
+    },
+    gameComplete: {
+        position: 'absolute',
+        height: 50,
+        bottom: 0
     }
 });
 

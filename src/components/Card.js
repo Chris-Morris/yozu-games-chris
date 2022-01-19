@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(249, 249, 249)',
         justifyContent: 'space-between',
         borderRadius: 8,
+        borderTopColor: '#D3D3D3',
+        borderTopWidth: 1
     },
     topImage: {
         flexDirection: 'row',
