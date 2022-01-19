@@ -73,7 +73,7 @@ const PlayScreen = ({ navigation }) => {
         }
 
         setLocalTurn(turn);
-        animate();
+        // animate();
     }
 
     return (
@@ -106,7 +106,7 @@ const PlayScreen = ({ navigation }) => {
                         }).reverse()}
                     </View>
                     {turn < 8 ?
-                        <ButtonContainer />
+                        <ButtonContainer animate={animate} />
                         :
                         <Text style={styles.gameComplete} >Let's see how you did!</Text>
                     }

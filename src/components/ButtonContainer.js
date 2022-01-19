@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { guess } from '../screens/Play/PlayScreenSlice';
 
-const ButtonContainer = () => {
+const ButtonContainer = ({ animate }) => {
     const dispatch = useDispatch();
     const [lowerButtonStyle, setLowerButtonStyle] = useState([styles.button, styles.inactive]);
     const [higherButtonStyle, setHigherButtonStyle] = useState([styles.button, styles.inactive]);
@@ -11,6 +11,7 @@ const ButtonContainer = () => {
     const [higherButtonTextStyle, setHigherButtonTextStyle] = useState([styles.text, styles.inactiveText]);
 
     const handleGuess = (direction) => {
+        animate();
         dispatch(guess(direction));
 
         if (direction === 'lower') {
