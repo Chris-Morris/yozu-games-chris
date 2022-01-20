@@ -11,8 +11,7 @@ const ButtonContainer = ({ animate }) => {
     const [higherButtonTextStyle, setHigherButtonTextStyle] = useState([styles.text, styles.inactiveText]);
 
     const handleGuess = (direction) => {
-        animate();
-        dispatch(guess(direction));
+        animate(direction);
 
         if (direction === 'lower') {
             setLowerButtonStyle([styles.button, styles.active]);
@@ -28,9 +27,9 @@ const ButtonContainer = ({ animate }) => {
     }
 
     return (
-        <View style={styles.container} >
-            <TouchableOpacity style={lowerButtonStyle} onPress={() => handleGuess('lower')} ><Text style={lowerButtonTextStyle} >Lower</Text></TouchableOpacity>
-            <TouchableOpacity style={higherButtonStyle} onPress={() => handleGuess('higher')} ><Text style={higherButtonTextStyle} >Higher</Text></TouchableOpacity>
+        <View style={ styles.container } >
+            <TouchableOpacity style={ lowerButtonStyle } onPress={ () => handleGuess('lower') } ><Text style={ lowerButtonTextStyle } >Lower</Text></TouchableOpacity>
+            <TouchableOpacity style={ higherButtonStyle } onPress={ () => handleGuess('higher') } ><Text style={ higherButtonTextStyle } >Higher</Text></TouchableOpacity>
         </View>
     )
 };

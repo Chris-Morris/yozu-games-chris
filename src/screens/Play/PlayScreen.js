@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text, Animated } from 'react-native';
-import { startGame, setEndGame } from './PlayScreenSlice';
+import { startGame, setEndGame, guess } from './PlayScreenSlice';
 import Stat from '../../components/Stat';
 
 // Import Components
@@ -18,7 +18,6 @@ const PlayScreen = ({ navigation }) => {
 
     // Deck State
     const deck = useSelector(state => state.Play.cardDeck);
-    const turn = useSelector(state => state.Play.turn);
 
     useFocusEffect(
         useCallback(() => {
@@ -34,7 +33,7 @@ const PlayScreen = ({ navigation }) => {
 
     const topCard = useRef(new Animated.Value(0)).current;
 
-    const animate = () => {
+    const animate = (direction) => {
         Animated.timing(
             topCard,
             {
@@ -43,6 +42,10 @@ const PlayScreen = ({ navigation }) => {
                 useNativeDriver: true
             }
         ).start(() => {
+            // Splice Card Deck here
+            dispatch(guess(direction));
+            console.log(deck.length);
+
             if (deck.length <= 1) {
                 setEndGame(true);
                 setTimeout(() => {
@@ -57,45 +60,44 @@ const PlayScreen = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
-            {play ? (
+        <View style={ styles.container }>
+            { play ? (
                 <>
                     <Stats />
                     <View
-                        style={styles.deckContainer}
+                        style={ styles.deckContainer }
                     />
-                    <View style={styles.deck} >
-                        {deck.map((card, i) => {
-                            if (i < turn) {
-                                return null;
-                            };
+                    <View style={ styles.deck } >
+                        { console.log("\n\n\n") }
+                        { deck.map((card, i) => {
+                            console.log(card);
 
-                            if (i === turn) {
+                            if (i === 0) {
                                 return (
-                                    <Animated.View key={i} style={{ transform: [{ translateX: topCard }] }}>
-                                        <Card card={card} />
+                                    <Animated.View key={ i } style={ { transform: [{ translateX: topCard }] } }>
+                                        <Card card={ card } />
                                     </Animated.View>
                                 )
                             }
 
-                            if (i > turn) {
+                            if (i > 0) {
                                 return (
-                                    <Card key={i} card={card} />
+                                    <Card key={ i } card={ card } />
                                 )
                             }
-                        }).reverse()}
+                        }).reverse() }
                     </View>
-                    {deck.length > 1 ?
-                        <ButtonContainer animate={animate} />
+                    { deck.length > 1 ?
+                        <ButtonContainer animate={ animate } />
                         :
-                        <Text style={styles.gameComplete} >Let's see how you did!</Text>
+                        <Text style={ styles.gameComplete } >Let's see how you did!</Text>
                     }
 
                 </>
             ) : (
-                <View style={styles.startGameContainer} >
-                    <Stat statName={"High Score"} statNumber={highScore} />
-                    <TouchableOpacity style={styles.startGameButton} onPress={handleStartPlay} ><Text style={styles.startGameText} >Start Game</Text></TouchableOpacity>
+                <View style={ styles.startGameContainer } >
+                    <Stat statName={ "High Score" } statNumber={ highScore } />
+                    <TouchableOpacity style={ styles.startGameButton } onPress={ handleStartPlay } ><Text style={ styles.startGameText } >Start Game</Text></TouchableOpacity>
                 </View>
             )
             }

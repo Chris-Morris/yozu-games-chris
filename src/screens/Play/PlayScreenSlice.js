@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const numbers = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
 
 const initialState = {
-    turn: 0,
     score: 0,
     highScore: 0,
     newHighScore: false,
@@ -40,7 +39,6 @@ const initiateGame = (state) => {
         number: null,
         suit: ''
     };
-    state.turn = 0;
     state.score = 0;
     state.gameStarted = true
 }
@@ -53,8 +51,6 @@ const PlayScreenSlice = createSlice({
             initiateGame(state);
         },
         guess: (state, action) => {
-            state.turn++;
-
             state.lastCard = state.cardDeck[state.cardDeck.length - 1];
             state.cardDeck.splice(state.cardDeck.length - 1, 1);
             state.currentCard = state.cardDeck[state.cardDeck.length - 1];
