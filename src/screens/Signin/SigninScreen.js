@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useDispatch, useSelector } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { AuthContext } from '../../context/authContext';
+import { signIn } from '../../redux/AuthSlice';
 import YozuGames from '../../components/YozuGames';
 
 const SigninScreen = () => {
@@ -9,7 +9,7 @@ const SigninScreen = () => {
     const [password, setPassword] = useState('');
     const [invalidPassword, setInvalidPassword] = useState(false);
     const [showButton, setShowButton] = useState(false);
-    const { signIn } = useContext(AuthContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (username.length < 5) {
@@ -59,8 +59,8 @@ const SigninScreen = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container} >
-            <View style={styles.yozuContainer} >
+        <ScrollView contentContainerStyle={ styles.container } >
+            <View style={ styles.yozuContainer } >
                 <YozuGames />
             </View>
             <View>
@@ -68,12 +68,12 @@ const SigninScreen = () => {
                 <Text>(min 5 characters)</Text>
                 <TextInput
                     autoCapitalize='none'
-                    autoCorrect={false}
+                    autoCorrect={ false }
                     clearButtonMode='always'
-                    style={usernameStyle}
+                    style={ usernameStyle }
                     placeholder="Username"
-                    value={username}
-                    onChangeText={setUsername}
+                    value={ username }
+                    onChangeText={ setUsername }
                 />
             </View>
 
@@ -81,20 +81,20 @@ const SigninScreen = () => {
                 <Text>Please enter a valid password</Text>
                 <TextInput
                     autoCapitalize='none'
-                    autoCorrect={false}
+                    autoCorrect={ false }
                     clearButtonMode='always'
-                    style={passwordStyle}
+                    style={ passwordStyle }
                     placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
+                    value={ password }
+                    onChangeText={ setPassword }
                     secureTextEntry
                 />
             </View>
 
-            {showButton ?
-                <TouchableOpacity style={styles.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'black', fontSize: 20 }} >Sign In</Text></TouchableOpacity>
+            { showButton ?
+                <TouchableOpacity style={ styles.button } onPress={ () => dispatch(signIn()) } testID='enabledButton'><Text style={ { color: 'black', fontSize: 20 } } >Sign In</Text></TouchableOpacity>
                 :
-                <TouchableOpacity style={[styles.button, styles.inactiveButton]} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white', fontSize: 20 }} >Sign In</Text></TouchableOpacity>
+                <TouchableOpacity style={ [styles.button, styles.inactiveButton] } onPress={ signinError } testID='disabledButton'><Text style={ { color: 'white', fontSize: 20 } } >Sign In</Text></TouchableOpacity>
             }
         </ScrollView >
     );

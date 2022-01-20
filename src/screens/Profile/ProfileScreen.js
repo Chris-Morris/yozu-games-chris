@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useDispatch } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import YozuGames from '../../components/YozuGames';
 
-import { AuthContext } from '../../context/authContext';
+import { signOut } from '../../redux/AuthSlice';
+const dispatch = useDispatch();
 
 const ProfileScreen = () => {
-    const { signOut } = useContext(AuthContext);
+
 
     return (
-        <View style={styles.container}>
-            <View style={styles.yozuContainer} >
+        <View style={ styles.container }>
+            <View style={ styles.yozuContainer } >
                 <YozuGames />
             </View>
-            <TouchableOpacity style={styles.signoutButton} onPress={() => signOut()}><Text style={styles.signout} >Sign Out</Text></TouchableOpacity>
+            <TouchableOpacity style={ styles.signoutButton } onPress={ () => dispatch(signOut()) }><Text style={ styles.signout } >Sign Out</Text></TouchableOpacity>
         </View>
     )
 }

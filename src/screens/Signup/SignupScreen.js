@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useDispatch } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import DropShadow from "react-native-drop-shadow";
-import { AuthContext } from '../../context/authContext';
+import { signIn } from '../../redux/AuthSlice';
 import YozuGames from '../../components/YozuGames';
 
 const SignupScreen = () => {
@@ -15,8 +15,7 @@ const SignupScreen = () => {
     const [password, setPassword] = useState('');
     const [invalidPassword, setInvalidPassword] = useState(false);
     const [showButton, setShowButton] = useState(false);
-
-    const { signIn } = useContext(AuthContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (firstname.length < 2) {
@@ -90,20 +89,20 @@ const SignupScreen = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container} >
-            <View style={styles.yozuContainer} >
+        <ScrollView contentContainerStyle={ styles.container } >
+            <View style={ styles.yozuContainer } >
                 <YozuGames />
             </View>
             <View>
                 <Text>First name</Text>
                 <TextInput
                     autoCapitalize='sentences'
-                    autoCorrect={false}
+                    autoCorrect={ false }
                     clearButtonMode='always'
-                    style={styles.input}
+                    style={ styles.input }
                     placeholder="First Name"
-                    value={firstname}
-                    onChangeText={setFirstname}
+                    value={ firstname }
+                    onChangeText={ setFirstname }
                 />
             </View>
 
@@ -111,12 +110,12 @@ const SignupScreen = () => {
                 <Text>Last name</Text>
                 <TextInput
                     autoCapitalize='sentences'
-                    autoCorrect={false}
+                    autoCorrect={ false }
                     clearButtonMode='always'
-                    style={styles.input}
+                    style={ styles.input }
                     placeholder="Last Name"
-                    value={lastname}
-                    onChangeText={setLastname}
+                    value={ lastname }
+                    onChangeText={ setLastname }
                     secureTextEntry
                 />
             </View>
@@ -126,12 +125,12 @@ const SignupScreen = () => {
                 <Text>(min 5 characters)</Text>
                 <TextInput
                     autoCapitalize='none'
-                    autoCorrect={false}
+                    autoCorrect={ false }
                     clearButtonMode='always'
-                    style={usernameStyle}
+                    style={ usernameStyle }
                     placeholder="Username"
-                    value={username}
-                    onChangeText={setUsername}
+                    value={ username }
+                    onChangeText={ setUsername }
                 />
             </View>
 
@@ -139,19 +138,19 @@ const SignupScreen = () => {
                 <Text>Password</Text>
                 <TextInput
                     autoCapitalize='none'
-                    autoCorrect={false}
+                    autoCorrect={ false }
                     clearButtonMode='always'
-                    style={passwordStyle}
+                    style={ passwordStyle }
                     placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
+                    value={ password }
+                    onChangeText={ setPassword }
                 />
             </View>
 
-            {showButton ?
-                <TouchableOpacity style={styles.button} onPress={() => signIn({ username, password })}><Text style={{ color: 'white', fontSize: 20 }} >Sign Up</Text></TouchableOpacity>
+            { showButton ?
+                <TouchableOpacity style={ styles.button } onPress={ () => dispatch(signIn()) }><Text style={ { color: 'white', fontSize: 20 } } >Sign Up</Text></TouchableOpacity>
                 :
-                <TouchableOpacity style={[styles.button, styles.inactiveButton]} onPress={signupError} ><Text style={{ color: 'white', fontSize: 20 }} >Sign Up</Text></TouchableOpacity>
+                <TouchableOpacity style={ [styles.button, styles.inactiveButton] } onPress={ signupError } ><Text style={ { color: 'white', fontSize: 20 } } >Sign Up</Text></TouchableOpacity>
             }
         </ScrollView>
     );
