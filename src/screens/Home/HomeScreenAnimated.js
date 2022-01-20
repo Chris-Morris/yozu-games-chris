@@ -1,81 +1,88 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, TouchableOpacity, Animated, Easing } from 'react-native';
-import FotAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { resetHighScore, resetGame } from '../Play/PlayScreenSlice';
+import YozuGames from '../../components/YozuGames';
 
 const HomeScreenAnimated = ({ navigation }) => {
     const dispatch = useDispatch();
 
-    const animatedBox1 = new Animated.Value(-600);
-    const animatedBox2 = new Animated.Value(-600);
-    const animatedBox3 = new Animated.Value(-600);
-    const animatedBox4 = new Animated.Value(-600);
-
-    useFocusEffect(
-        useCallback(() => {
-            animate();
-            dispatch(resetGame());
-            dispatch(resetHighScore());
-        }, [])
-    );
+    const animatedBox1 = useRef(new Animated.Value(600)).current;
+    const animatedBox2 = useRef(new Animated.Value(600)).current;
+    const animatedBox3 = useRef(new Animated.Value(600)).current;
+    const animatedBox4 = useRef(new Animated.Value(600)).current;
 
     const animate = () => {
         Animated.parallel([
             Animated.timing(
                 animatedBox1,
                 {
-                    toValue: 250,
-                    duration: 200,
-                    easing: Easing.inOut
+                    toValue: 0,
+                    duration: 1000,
+                    useNativeDriver: true
                 }
             ),
             Animated.timing(
                 animatedBox2,
                 {
-                    toValue: 320,
-                    duration: 200,
-                    easing: Easing.inOut,
-                    delay: 50
+                    toValue: 5,
+                    duration: 1000,
+                    delay: 100,
+                    useNativeDriver: true
                 }
             ),
             Animated.timing(
                 animatedBox3,
                 {
-                    toValue: 390,
-                    duration: 200,
-                    easing: Easing.inOut,
-                    delay: 100
+                    toValue: 10,
+                    duration: 1000,
+                    delay: 200,
+                    useNativeDriver: true
                 }
             ),
             Animated.timing(
                 animatedBox4,
                 {
-                    toValue: 460,
-                    duration: 200,
-                    easing: Easing.inOut,
-                    delay: 150
+                    toValue: 15,
+                    duration: 1000,
+                    delay: 300,
+                    useNativeDriver: true
                 }
             )
         ]).start();
     }
 
+    useFocusEffect(
+        useCallback(() => {
+            animate();
+            dispatch(resetGame());
+            dispatch(resetHighScore());
+            return () => {
+                animatedBox1.setValue(600);
+                animatedBox2.setValue(600);
+                animatedBox3.setValue(600);
+                animatedBox4.setValue(600);
+            }
+        }, [])
+    );
+
     return (
         <View style={ styles.container }>
-            <FotAwesome5 name="dice" color="#FEC145" size={ 30 } />
-            <Text style={ styles.greeting } >Yozu Games</Text>
+            <View style={ styles.yozuContainer } >
+                <YozuGames />
+            </View>
             <View style={ styles.gameContainer } >
-                <TouchableOpacity style={ [styles.gameButton, styles.higherLower, { bottom: animatedBox1 }] } onPress={ () => navigation.navigate('Play') } ><Text style={ styles.buttonText } >Higher or Lower</Text></TouchableOpacity>
-                <TouchableOpacity style={ [styles.gameButton, styles.simonSays, { bottom: animatedBox2 }] } onPress={ () => alert('Sorry, Simon Says is currently in development.') } ><Text style={ styles.buttonText } >Simon Says</Text></TouchableOpacity>
-                <TouchableOpacity style={ [styles.gameButton, styles.memory, { bottom: animatedBox3 }] } onPress={ () => alert('Sorry, Memory is currently in development.') } ><Text style={ styles.buttonText } >Memory</Text></TouchableOpacity>
-                <TouchableOpacity style={ [styles.gameButton, styles.countdownLetters, { bottom: animatedBox4 }] } onPress={ () => alert('Sorry, Countdown Letters is currently in development.') } ><Text style={ styles.buttonText } >Countdown Letters</Text></TouchableOpacity>
+                <Animated.View style={ { transform: [{ translateY: animatedBox1 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.higherLower] } onPress={ () => navigation.navigate('Play') } ><Text style={ styles.buttonText } >Higher or Lower</Text></TouchableOpacity></Animated.View>
+                <Animated.View style={ { transform: [{ translateY: animatedBox2 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.simonSays] } onPress={ () => alert('Sorry, Simon Says is currently in development.') } ><Text style={ styles.buttonText } >Simon Says</Text></TouchableOpacity></Animated.View>
+                <Animated.View style={ { transform: [{ translateY: animatedBox3 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.memory] } onPress={ () => alert('Sorry, Memory is currently in development.') } ><Text style={ styles.buttonText } >Memory</Text></TouchableOpacity></Animated.View>
+                <Animated.View style={ { transform: [{ translateY: animatedBox4 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.countdownLetters] } onPress={ () => alert('Sorry, Countdown Letters is currently in development.') } ><Text style={ styles.buttonText } >Countdown Letters</Text></TouchableOpacity></Animated.View>
             </View>
         </View>
     )
 }
 
-HomeScreen.navigationOptions = () => {
+HomeScreenAnimated.navigationOptions = () => {
     return {
         headerShown: false
     };
@@ -86,29 +93,25 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
-        justifyContent: 'space-between',
         paddingVertical: 30
+    },
+    yozuContainer: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center'
     },
     gameContainer: {
         height: 320,
         justifyContent: 'space-between'
     },
-    greeting: {
-        fontSize: 30,
-        marginBottom: 30,
-        textAlign: 'center',
-        color: '#FEC145'
-    },
     gameButton: {
         height: 66,
         width: 200,
-        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center'
     },
     higherLower: {
         backgroundColor: '#F56A68'
-
     },
     simonSays: {
         backgroundColor: '#66E6D7'

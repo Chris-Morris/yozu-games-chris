@@ -19,6 +19,7 @@ import StatsScreen from './src/screens/Stats/StatsScreen';
 import AwardsScreen from './src/screens/Awards/AwardsScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
 import EndGameScreen from './src/screens/EndGame/EndGameScreen';
+import HomeScreenAnimated from './src/screens/Home/HomeScreenAnimated';
 
 // Routes
 // import Routes from './Routes';
@@ -39,7 +40,7 @@ const GameStack = createNativeStackNavigator();
 function HomeTabs() {
   return (
     <Tab.Navigator screenOptions={ { headerShown: false } } >
-      <Tab.Screen name="Home" component={ HomeScreen } options={ {
+      <Tab.Screen name="Home" component={ HomeScreenAnimated } options={ {
         tabBarLabel: 'GAMES',
         tabBarIcon: ({ color, size }) => (
           <Material name="dice-5-outline" color={ color } size={ size } />
@@ -67,15 +68,7 @@ function HomeTabs() {
   )
 }
 
-// export default () => {
-//   return (
-//     <Provider store={ store } >
-//       <Routes />
-//     </Provider>
-//   )
-// }
-
-export default () => {
+const App = () => {
   // const dispatch = useDispatch();
   const [authState, dispatch] = useReducer(
     (prevState, action) => {
@@ -117,7 +110,7 @@ export default () => {
         console.log(e);
       };
 
-      dispatch({ type: 'RESTORE_TOKEN', token: 'dummmy_token' });
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
     bootstrapAsync();
@@ -140,7 +133,14 @@ export default () => {
           { authState.userToken ?
             <GameStack.Navigator>
               <GameStack.Screen name="HomeScreen" component={ HomeTabs } options={ { headerShown: false } } />
-              <GameStack.Screen name="Play" component={ PlayScreen } options={ { headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: true } } />
+              <GameStack.Screen name="Play" component={ PlayScreen } options={ {
+                headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: false, headerStyle: {
+                  backgroundColor: '#F56A68',
+                }, headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: 'white'
+                }
+              } } />
               <GameStack.Screen name="EndGame" component={ EndGameScreen } options={ { headerShown: false } } />
             </GameStack.Navigator>
             :
@@ -166,3 +166,5 @@ export default () => {
     </Provider>
   );
 }
+
+export default App;

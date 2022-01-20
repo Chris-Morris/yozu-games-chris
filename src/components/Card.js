@@ -1,51 +1,42 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
-import { startGame } from '../screens/Play/PlayScreenSlice';
 
-const Card = () => {
-    // Selectors
-    const currentCard = useSelector(state => state.Play.currentCard)
+const Card = ({ card }) => {
 
     let color = 'red'
     const size = 30
-    if (currentCard) {
-        if (currentCard.suit == 'club' || currentCard.suit == 'spade') {
+    if (card) {
+        if (card.suit == 'club' || card.suit == 'spade') {
             color = 'black';
         } else {
             color = 'red'
         };
     };
 
-    const dispatch = useDispatch();
-
     return (
         <DropShadow style={styles.shadowProp} >
-            {currentCard.number ?
-                <View style={styles.card} >
-                    <View style={styles.topImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} /></View>
-                    <View style={styles.numberContainer} ><Text style={styles.number} >{currentCard.number}</Text></View>
-                    <View style={styles.bottomImage} ><Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateY: '180deg' }] }} /></View>
-                </View>
-
-                :
-                <View style={styles.startGameContainer} >
-                    <TouchableOpacity style={styles.startGameButton} onPress={() => dispatch(startGame())} ><Text style={styles.startGameText} >Start Game</Text></TouchableOpacity>
-                </View>
-            }
+            <View style={styles.card} >
+                <View style={styles.topImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} /></View>
+                <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{card.number}</Text></View>
+                <View style={styles.bottomImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /></View>
+            </View>
         </DropShadow >
     )
 }
 
 const styles = StyleSheet.create({
     card: {
+        position: 'absolute',
         height: 320,
         width: '70%',
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(249, 249, 249)',
         justifyContent: 'space-between',
         borderRadius: 8,
+        borderTopColor: '#D3D3D3',
+        borderTopWidth: 1
     },
     topImage: {
         flexDirection: 'row',
@@ -86,26 +77,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 25
-    },
-    startGameContainer: {
-        height: 320,
-        width: '70%',
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 8,
-    },
-    startGameButton: {
-        height: 60,
-        width: 180,
-        backgroundColor: 'rgb(228, 70, 67)',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    startGameText: {
-        fontSize: 22
+        marginTop: 10
     }
 })
 

@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { Card } from 'react-native-elements';
-import { LinearGradient } from 'expo-linear-gradient';
-import DropShadow from "react-native-drop-shadow";
 import { AuthContext } from '../../context/authContext';
+import YozuGames from '../../components/YozuGames';
 
 const SigninScreen = () => {
     const [username, setUsername] = useState('');
@@ -50,117 +48,72 @@ const SigninScreen = () => {
             ]
         );
 
-    return (
-        <ScrollView contentContainerStyle={signinStyle.container} >
-            <LinearGradient
-                // Background Linear Gradient
-                colors={['rgba(0,0,0,0.8)', 'transparent']}
-                style={signinStyle.background}
-            />
-            <DropShadow style={signinStyle.shadowProps} >
-                <Card containerStyle={signinStyle.card}>
-                    <Card.Title>Sign In</Card.Title>
-                    <Card.Divider />
-                    {!invalidUsername ?
-                        <View>
-                            <Text>Please enter your username</Text>
-                            <Text>(min 5 characters)</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.input}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                            />
-                        </View>
-                        :
-                        <View>
-                            <Text>Please enter a valid username</Text>
-                            <Text>(min 5 characters)</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.invalidInput}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                            />
-                        </View>
-                    }
+    let usernameStyle = styles.input;
+    if (invalidUsername) {
+        usernameStyle = [styles.input, styles.invalidInput];
+    };
 
-                    {invalidPassword ?
-                        <View>
-                            <Text>Please enter a valid password</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.invalidInput}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                            />
-                        </View>
-                        :
-                        <View>
-                            <Text>Please enter your password</Text>
-                            <TextInput
-                                autoCapitalize='none'
-                                autoCorrect={false}
-                                clearButtonMode='always'
-                                style={signinStyle.input}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                            />
-                        </View>
-                    }
-                    {showButton ?
-                        <TouchableOpacity style={signinStyle.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
-                        :
-                        <TouchableOpacity style={signinStyle.inactiveButton} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white' }} >Sign In</Text></TouchableOpacity>
-                    }
-                </Card>
-            </DropShadow>
+    let passwordStyle = styles.input;
+    if (invalidPassword) {
+        passwordStyle = [styles.input, styles.invalidInput];
+    };
+
+    return (
+        <ScrollView contentContainerStyle={styles.container} >
+            <View style={styles.yozuContainer} >
+                <YozuGames />
+            </View>
+            <View>
+                <Text>Please enter your username</Text>
+                <Text>(min 5 characters)</Text>
+                <TextInput
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    clearButtonMode='always'
+                    style={usernameStyle}
+                    placeholder="Username"
+                    value={username}
+                    onChangeText={setUsername}
+                />
+            </View>
+
+            <View>
+                <Text>Please enter a valid password</Text>
+                <TextInput
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    clearButtonMode='always'
+                    style={passwordStyle}
+                    placeholder="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                />
+            </View>
+
+            {showButton ?
+                <TouchableOpacity style={styles.button} onPress={() => signIn()} testID='enabledButton'><Text style={{ color: 'black', fontSize: 20 }} >Sign In</Text></TouchableOpacity>
+                :
+                <TouchableOpacity style={[styles.button, styles.inactiveButton]} onPress={signinError} testID='disabledButton'><Text style={{ color: 'white', fontSize: 20 }} >Sign In</Text></TouchableOpacity>
+            }
         </ScrollView >
     );
 }
 
-const signinStyle = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: 'blue',
-        height: 600,
-        paddingTop: 100
+        paddingVertical: 30
     },
-    background: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        height: 300,
-    },
-    card: {
-        height: 300,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        borderRadius: 5
-    },
-    shadowProps: {
-        shadowColor: '#171717',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.4,
-        shadowRadius: 2
+    yozuContainer: {
+        height: 100,
+        width: '100%',
+        alignItems: 'center'
     },
     input: {
-        height: 30,
+        height: 35,
         width: 200,
         backgroundColor: 'rgb(236, 240, 246)',
         borderStyle: 'solid',
@@ -171,33 +124,17 @@ const signinStyle = StyleSheet.create({
         marginBottom: 10
     },
     invalidInput: {
-        height: 30,
-        width: 200,
-        backgroundColor: 'rgb(236, 240, 246)',
-        borderStyle: 'solid',
-        borderColor: 'rgb(255, 2, 2)',
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingLeft: 10,
-        marginBottom: 10
+        borderColor: 'rgb(255, 2, 2)'
     },
     button: {
         backgroundColor: 'rgb(0, 122, 204)',
-        height: 30,
-        width: 124,
-        borderRadius: 5,
+        height: 50,
+        width: 200,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 35
+        alignItems: 'center'
     },
     inactiveButton: {
-        backgroundColor: 'rgb(51, 51, 51)',
-        height: 30,
-        width: 124,
-        borderRadius: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 35
+        backgroundColor: 'rgb(51, 51, 51)'
     }
 });
 

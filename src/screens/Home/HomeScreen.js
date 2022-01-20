@@ -17,8 +17,10 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <View style={ styles.container }>
-            <FotAwesome5 name="dice" color="#FEC145" size={ 30 } />
-            <Text style={ styles.greeting } >Yozu Games</Text>
+            <View style={ styles.yozuContainer } >
+                <FotAwesome5 name="dice" color="#FEC145" size={ 30 } />
+                <Text style={ styles.greeting } >Yozu Games</Text>
+            </View>
             <View style={ styles.gameContainer } >
                 <TouchableOpacity style={ styles.higherLower } onPress={ () => navigation.navigate('Play') } ><Text style={ styles.buttonText } >Higher or Lower</Text></TouchableOpacity>
                 <TouchableOpacity style={ styles.simonSays } onPress={ () => alert('Sorry, Simon Says is currently in development.') } ><Text style={ styles.buttonText } >Simon Says</Text></TouchableOpacity>
@@ -40,8 +42,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgb(249, 249, 249)',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         paddingVertical: 30
+    },
+    yozuContainer: {
+        height: 200,
+        width: '100%'
     },
     gameContainer: {
         height: 320,
