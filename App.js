@@ -31,7 +31,6 @@ import { AuthContext } from './src/context/authContext';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import { restoreToken, signIn, signOut } from './src/redux/AuthSlice';
-import HomeScreenAnimated from './src/screens/Home/HomeScreenAnimated';
 
 // Set up Stack Navigator
 const Tab = createBottomTabNavigator();

@@ -11,14 +11,14 @@ describe('PlayScreen', () => {
     let component;
     beforeEach(() => {
         component = (
-            <Provider store={store}>
+            <Provider store={ store }>
                 <NavigationContainer>
                     <PlayScreen />
                 </NavigationContainer>
             </Provider>
         );
 
-        return { getByText, queryByTestId, debug } = render(component);
+        return { getByText, queryAllByTestId, debug } = render(component);
     });
 
     afterEach(cleanup);
@@ -34,34 +34,38 @@ describe('PlayScreen', () => {
 
 
         const cards = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
-        const cardNumber = queryByTestId('cardNumber');
-        expect(cards).toContain(cardNumber.props.children);
+        const cardNumbers = queryAllByTestId('cardNumber');
+        let working = true;
+        for (let i = 0; i < cardNumbers.length; i++) {
+            if (!cards.includes(cardNumbers[i].props.children)) {
+                working = false;
+            };
+        };
+        expect(working).toBeTruthy();
     });
 
 
-    test('Card updates as Higher or Lower buttons are pressed', async () => {
+    test('Card updates as Higher or Lower buttons are pressed', () => {
 
-        const button = await getByText(/start game/i);
+        const button = getByText(/start game/i);
         fireEvent.press(button);
 
-        debug();
-        const cardNumber = await queryByTestId('cardNumber');
+        // debug();
+        const cardNumbers = queryAllByTestId('cardNumber');
+        const oldCard = cardNumbers[0].props.children;
+        console.log('Original card', oldCard)
 
+        const higher = getByText(/higher/i);
+        fireEvent.press(higher);
 
-        const higher = await getByText(/higher/i);
-        await fireEvent.press(higher);
-
-        debug();
-
-        const lower = await getByText(/lower/i);
-        fireEvent.press(lower);
+        // debug();
 
         const cards = ['2', '3', '4', '5', '6', '7', '8', '9', 'jack', 'queen', 'king', 'ace'];
-        const newCardNumber = await queryByTestId('cardNumber');
-        console.log('Original card', cardNumber.props)
-        console.log('New card', newCardNumber.props)
-        expect(cards).toContain(newCardNumber.props.children);
-        expect(cardNumber.props.children).toBe(newCardNumber.props.children);
+        const newCardNumbers = queryAllByTestId('cardNumber');
+        const newCard = newCardNumbers[0].props.children;
+        console.log('New card', newCard)
+        expect(cards).toContain(newCard);
+        expect(oldCard).not.toBe(newCard);
 
     })
 });
