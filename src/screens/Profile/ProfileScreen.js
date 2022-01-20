@@ -1,12 +1,11 @@
-import React, { useDispatch } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import YozuGames from '../../components/YozuGames';
-
 import { signOut } from '../../redux/AuthSlice';
-const dispatch = useDispatch();
 
 const ProfileScreen = () => {
-
+    const dispatch = useDispatch();
 
     return (
         <View style={ styles.container }>

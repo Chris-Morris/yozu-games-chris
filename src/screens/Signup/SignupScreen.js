@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useDispatch } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Card } from 'react-native-elements';
 import DropShadow from "react-native-drop-shadow";
@@ -148,7 +149,7 @@ const SignupScreen = () => {
             </View>
 
             { showButton ?
-                <TouchableOpacity style={ styles.button } onPress={ () => dispatch(signIn()) }><Text style={ { color: 'white', fontSize: 20 } } >Sign Up</Text></TouchableOpacity>
+                <TouchableOpacity style={ styles.button } onPress={ () => dispatch(signIn('dummy-token')) }><Text style={ { color: 'white', fontSize: 20 } } >Sign Up</Text></TouchableOpacity>
                 :
                 <TouchableOpacity style={ [styles.button, styles.inactiveButton] } onPress={ signupError } ><Text style={ { color: 'white', fontSize: 20 } } >Sign Up</Text></TouchableOpacity>
             }

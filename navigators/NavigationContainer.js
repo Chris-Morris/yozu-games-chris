@@ -1,4 +1,4 @@
-import React, { useEffect, useSelector } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as SecureStore from 'expo-secure-store';
 
@@ -6,16 +6,15 @@ import * as SecureStore from 'expo-secure-store';
 import { NavigationContainer } from '@react-navigation/native';
 
 // Import Navigators
-import GameStack from './navigators/GameStack';
-import AuthTabs from './navigators/AuthTabs';
+import GameStack from './GameStack';
+import AuthTabs from './AuthTabs';
 
 // Import Store
 import { restoreToken } from '../src/redux/AuthSlice';
 
-const token = useSelector(state => state.Auth.userToken);
-const dispatch = useDispatch();
-
 const NavContainer = () => {
+    const token = useSelector(state => state.Auth.userToken);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const bootstrapAsync = async () => {

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useDispatch, useSelector } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { signIn } from '../../redux/AuthSlice';
 import YozuGames from '../../components/YozuGames';
@@ -92,7 +93,7 @@ const SigninScreen = () => {
             </View>
 
             { showButton ?
-                <TouchableOpacity style={ styles.button } onPress={ () => dispatch(signIn()) } testID='enabledButton'><Text style={ { color: 'black', fontSize: 20 } } >Sign In</Text></TouchableOpacity>
+                <TouchableOpacity style={ styles.button } onPress={ () => dispatch(signIn('dummy-token')) } testID='enabledButton'><Text style={ { color: 'black', fontSize: 20 } } >Sign In</Text></TouchableOpacity>
                 :
                 <TouchableOpacity style={ [styles.button, styles.inactiveButton] } onPress={ signinError } testID='disabledButton'><Text style={ { color: 'white', fontSize: 20 } } >Sign In</Text></TouchableOpacity>
             }
