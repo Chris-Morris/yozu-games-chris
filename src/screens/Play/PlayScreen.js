@@ -44,6 +44,7 @@ const PlayScreen = ({ navigation }) => {
         ).start(() => {
             // Splice Card Deck here
             dispatch(guess(direction));
+            topCard.setValue(0);
             console.log(deck.length);
 
             if (deck.length <= 2) {
