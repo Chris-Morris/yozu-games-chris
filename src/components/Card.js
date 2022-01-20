@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
@@ -17,11 +16,11 @@ const Card = ({ card }) => {
     };
 
     return (
-        <DropShadow style={styles.shadowProp} >
-            <View style={styles.card} >
-                <View style={styles.topImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} /></View>
-                <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{card.number}</Text></View>
-                <View style={styles.bottomImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /></View>
+        <DropShadow style={ styles.shadowProp } >
+            <View style={ styles.card } >
+                <View style={ styles.topImage } ><Icon name={ `cards-${card.suit}` } color={ color } size={ size } /></View>
+                <View style={ styles.numberContainer } ><Text testID='cardNumber' style={ styles.number } >{ card.number }</Text></View>
+                <View style={ styles.bottomImage } ><Icon name={ `cards-${card.suit}` } color={ color } size={ size } style={ { transform: [{ rotateX: '180deg' }] } } /></View>
             </View>
         </DropShadow >
     )

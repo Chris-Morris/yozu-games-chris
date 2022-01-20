@@ -46,7 +46,7 @@ const PlayScreen = ({ navigation }) => {
             dispatch(guess(direction));
             console.log(deck.length);
 
-            if (deck.length <= 1) {
+            if (deck.length <= 2) {
                 setEndGame(true);
                 setTimeout(() => {
                     if (newHighScore) {
@@ -70,7 +70,7 @@ const PlayScreen = ({ navigation }) => {
                     <View style={ styles.deck } >
                         { console.log("\n\n\n") }
                         { deck.map((card, i) => {
-                            console.log(card);
+                            console.log(i);
 
                             if (i === 0) {
                                 return (

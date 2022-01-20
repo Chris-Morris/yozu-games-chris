@@ -6,7 +6,7 @@ import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 // Import Screens
-import HomeScreenAnimated from "../src/screens/Home/HomeScreenAnimated";
+import HomeScreen from "../src/screens/Home/HomeScreen";
 import StatsScreen from "../src/screens/Stats/StatsScreen";
 import AwardsScreen from "../src/screens/Awards/AwardsScreen";
 import ProfileScreen from "../src/screens/Profile/ProfileScreen";
@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const HomeTabs = () => {
     return (
         <Tab.Navigator screenOptions={ { headerShown: false } } >
-            <Tab.Screen name="Home" component={ HomeScreenAnimated } options={ {
+            <Tab.Screen name="Home" component={ HomeScreen } options={ {
                 tabBarLabel: 'GAMES',
                 tabBarIcon: ({ color, size }) => (
                     <Material name="dice-5-outline" color={ color } size={ size } />

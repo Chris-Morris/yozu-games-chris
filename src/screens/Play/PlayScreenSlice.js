@@ -51,9 +51,9 @@ const PlayScreenSlice = createSlice({
             initiateGame(state);
         },
         guess: (state, action) => {
-            state.lastCard = state.cardDeck[state.cardDeck.length - 1];
-            state.cardDeck.splice(state.cardDeck.length - 1, 1);
-            state.currentCard = state.cardDeck[state.cardDeck.length - 1];
+            state.lastCard = state.cardDeck[0];
+            state.cardDeck.splice(0, 1);
+            state.currentCard = state.cardDeck[0];
 
             if (action.payload === 'higher') {
                 if (numbers.indexOf(state.currentCard.number) > numbers.indexOf(state.lastCard.number)) {
