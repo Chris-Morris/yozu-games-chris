@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import FotAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { resetHighScore, resetGame } from '../Play/PlayScreenSlice';
 
@@ -16,14 +16,14 @@ const HomeScreen = ({ navigation }) => {
     );
 
     return (
-        <View style={styles.container}>
-            <FotAwesome5 name="dice" color="#FEC145" size={30} />
-            <Text style={styles.greeting} >Yozu Games</Text>
-            <View style={styles.gameContainer} >
-                <TouchableOpacity style={styles.higherLower} onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.simonSays} onPress={() => alert('Sorry, Simon Says is currently in development.')} ><Text style={styles.buttonText} >Simon Says</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.memory} onPress={() => alert('Sorry, Memory is currently in development.')} ><Text style={styles.buttonText} >Memory</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.countdownLetters} onPress={() => alert('Sorry, Countdown Letters is currently in development.')} ><Text style={styles.buttonText} >Countdown Letters</Text></TouchableOpacity>
+        <View style={ styles.container }>
+            <FotAwesome5 name="dice" color="#FEC145" size={ 30 } />
+            <Text style={ styles.greeting } >Yozu Games</Text>
+            <View style={ styles.gameContainer } >
+                <TouchableOpacity style={ styles.higherLower } onPress={ () => navigation.navigate('Play') } ><Text style={ styles.buttonText } >Higher or Lower</Text></TouchableOpacity>
+                <TouchableOpacity style={ styles.simonSays } onPress={ () => alert('Sorry, Simon Says is currently in development.') } ><Text style={ styles.buttonText } >Simon Says</Text></TouchableOpacity>
+                <TouchableOpacity style={ styles.memory } onPress={ () => alert('Sorry, Memory is currently in development.') } ><Text style={ styles.buttonText } >Memory</Text></TouchableOpacity>
+                <TouchableOpacity style={ styles.countdownLetters } onPress={ () => alert('Sorry, Countdown Letters is currently in development.') } ><Text style={ styles.buttonText } >Countdown Letters</Text></TouchableOpacity>
             </View>
         </View>
     )

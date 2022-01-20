@@ -20,6 +20,9 @@ import AwardsScreen from './src/screens/Awards/AwardsScreen';
 import ProfileScreen from './src/screens/Profile/ProfileScreen';
 import EndGameScreen from './src/screens/EndGame/EndGameScreen';
 
+// Routes
+// import Routes from './Routes';
+
 // Context
 import { AuthContext } from './src/context/authContext';
 
@@ -27,6 +30,7 @@ import { AuthContext } from './src/context/authContext';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import { restoreToken, signIn, signOut } from './src/redux/AuthSlice';
+import HomeScreenAnimated from './src/screens/Home/HomeScreenAnimated';
 
 // Set up Stack Navigator
 const Tab = createBottomTabNavigator();
@@ -34,66 +38,74 @@ const GameStack = createNativeStackNavigator();
 
 function HomeTabs() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }} >
-      <Tab.Screen name="Home" component={HomeScreen} options={{
+    <Tab.Navigator screenOptions={ { headerShown: false } } >
+      <Tab.Screen name="Home" component={ HomeScreen } options={ {
         tabBarLabel: 'GAMES',
         tabBarIcon: ({ color, size }) => (
-          <Material name="dice-5-outline" color={color} size={size} />
+          <Material name="dice-5-outline" color={ color } size={ size } />
         )
-      }} />
-      <Tab.Screen name="Stats" component={StatsScreen} options={{
+      } } />
+      <Tab.Screen name="Stats" component={ StatsScreen } options={ {
         tabBarLabel: 'STATS',
         tabBarIcon: ({ color, size }) => (
-          <Entypo name="text-document" color={color} size={size} />
+          <Entypo name="text-document" color={ color } size={ size } />
         )
-      }} />
-      <Tab.Screen name="Awards" component={AwardsScreen} options={{
+      } } />
+      <Tab.Screen name="Awards" component={ AwardsScreen } options={ {
         tabBarLabel: 'AWARDS',
         tabBarIcon: ({ color, size }) => (
-          <Material name="star-circle-outline" color={color} size={size} />
+          <Material name="star-circle-outline" color={ color } size={ size } />
         )
-      }} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{
+      } } />
+      <Tab.Screen name="Profile" component={ ProfileScreen } options={ {
         tabBarLabel: 'PROFILE',
         tabBarIcon: ({ color, size }) => (
-          <Entypo name="heart-outlined" color={color} size={size} />
+          <Entypo name="heart-outlined" color={ color } size={ size } />
         )
-      }} />
+      } } />
     </Tab.Navigator>
   )
 }
 
+// export default () => {
+//   return (
+//     <Provider store={ store } >
+//       <Routes />
+//     </Provider>
+//   )
+// }
+
 export default () => {
-  const dispatch = useDispatch();
-  // const [authState, dispatch] = useReducer(
-  //   (prevState, action) => {
-  //     switch (action.type) {
-  //       case 'RESTORE_TOKEN':
-  //         return {
-  //           ...prevState,
-  //           userToken: action.token,
-  //           isLoading: false
-  //         };
-  //       case 'SIGN_IN':
-  //         return {
-  //           ...prevState,
-  //           isSignout: false,
-  //           userToken: action.token
-  //         };
-  //       case 'SIGN_OUT':
-  //         return {
-  //           ...prevState,
-  //           isSignout: true,
-  //           userToken: null
-  //         };
-  //     }
-  //   },
-  //   {
-  //     isLoading: true,
-  //     isSignout: false,
-  //     userToken: null
-  //   }
-  // );
+  // const dispatch = useDispatch();
+  const [authState, dispatch] = useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null
+    }
+  );
 
   useEffect(() => {
     const bootstrapAsync = async () => {
@@ -105,7 +117,7 @@ export default () => {
         console.log(e);
       };
 
-      dispatch(restoreToken(userToken));
+      dispatch({ type: 'RESTORE_TOKEN', token: 'dummmy_token' });
     };
 
     bootstrapAsync();
@@ -122,31 +134,31 @@ export default () => {
   }), []);
 
   return (
-    <Provider store={store}>
-      <AuthContext.Provider value={authContext}>
+    <Provider store={ store }>
+      <AuthContext.Provider value={ authContext }>
         <NavigationContainer>
-          {authState.userToken ?
+          { authState.userToken ?
             <GameStack.Navigator>
-              <GameStack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
-              <GameStack.Screen name="Play" component={PlayScreen} options={{ headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: true }} />
-              <GameStack.Screen name="EndGame" component={EndGameScreen} options={{ headerShown: false }} />
+              <GameStack.Screen name="HomeScreen" component={ HomeTabs } options={ { headerShown: false } } />
+              <GameStack.Screen name="Play" component={ PlayScreen } options={ { headerBackTitleVisible: false, headerTitle: 'Higher or Lower', headerTransparent: true } } />
+              <GameStack.Screen name="EndGame" component={ EndGameScreen } options={ { headerShown: false } } />
             </GameStack.Navigator>
             :
-            <Tab.Navigator screenOptions={{
+            <Tab.Navigator screenOptions={ {
               headerShown: false
-            }}>
-              <Tab.Screen name="Sign In" component={SigninScreen} options={{
+            } }>
+              <Tab.Screen name="Sign In" component={ SigninScreen } options={ {
                 tabBarLabel: 'Sign In',
                 tabBarIcon: ({ color, size }) => (
-                  <FontAwesome name="key" color={color} size={size} />
+                  <FontAwesome name="key" color={ color } size={ size } />
                 ),
-              }} />
-              <Tab.Screen name="Sign Up" component={SignupScreen} options={{
+              } } />
+              <Tab.Screen name="Sign Up" component={ SignupScreen } options={ {
                 tabBarLabel: 'Sign Up',
                 tabBarIcon: ({ color, size }) => (
-                  <FontAwesome name="sign-in" color={color} size={size} />
+                  <FontAwesome name="sign-in" color={ color } size={ size } />
                 ),
-              }} />
+              } } />
             </Tab.Navigator>
           }
         </NavigationContainer>
