@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
 
-const Card = ({ card, top }) => {
+const Card = ({ card, top, left }) => {
 
     let color = 'red'
     const size = 30
@@ -16,7 +16,7 @@ const Card = ({ card, top }) => {
     };
 
     return (
-        <DropShadow style={[styles.shadowProp, { top: top }]} >
+        <DropShadow style={[styles.shadowProp, { top: top, left: left }]} >
             <View style={styles.card} >
                 <View style={styles.topImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} /></View>
                 <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{card.number}</Text></View>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 50
     },
     number: {
-        fontSize: 100,
+        fontSize: 80,
         fontWeight: 'bold'
     },
     bottomImage: {

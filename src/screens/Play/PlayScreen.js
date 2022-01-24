@@ -44,7 +44,7 @@ const PlayScreen = ({ navigation }) => {
             topCard,
             {
                 toValue: value,
-                duration: 500,
+                duration: 250,
                 useNativeDriver: true
             }
         ).start(() => {
@@ -79,14 +79,14 @@ const PlayScreen = ({ navigation }) => {
                             if (i === 0) {
                                 return (
                                     <Animated.View key={i} style={{ transform: [{ translateX: topCard }] }}>
-                                        <Card card={card} top={i * 10 + 100} />
+                                        <Card card={card} top={i * 3 + 100} left={i * 3} />
                                     </Animated.View>
                                 )
                             }
 
                             if (i > 0) {
                                 return (
-                                    <Card key={i} card={card} top={i * 10 + 100} />
+                                    <Card key={i} card={card} top={i * 3 + 100} left={i * 3} />
                                 )
                             }
                         }).reverse()}
