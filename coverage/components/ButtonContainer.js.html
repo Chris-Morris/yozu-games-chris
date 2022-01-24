@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.19% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/21</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">75% </span>
-                <span class="quiet">Functions</span>
+                <span class="quiet">Branches</span>
                 <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.19% </span>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>4/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -133,30 +133,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,11 +207,11 @@ const ButtonContainer = ({ animate }) =&gt; {
     const handleGuess = (direction) =&gt; {
         animate(direction);
 &nbsp;
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (direction === 'lower') {
-<span class="cstat-no" title="statement not covered" >            setLowerButtonStyle([styles.button, styles.active]);</span>
-<span class="cstat-no" title="statement not covered" >            setHigherButtonStyle([styles.button, styles.inactive]);</span>
-<span class="cstat-no" title="statement not covered" >            setLowerButtonTextStyle([styles.text, styles.activeText]);</span>
-<span class="cstat-no" title="statement not covered" >            setHigherButtonTextStyle([styles.text, styles.inactiveText]);</span>
+        if (direction === 'lower') {
+            setLowerButtonStyle([styles.button, styles.active]);
+            setHigherButtonStyle([styles.button, styles.inactive]);
+            setLowerButtonTextStyle([styles.text, styles.activeText]);
+            setHigherButtonTextStyle([styles.text, styles.inactiveText]);
         } else if (direction === 'higher') {
             setLowerButtonStyle([styles.button, styles.inactive]);
             setHigherButtonStyle([styles.button, styles.active]);
@@ -221,9 +221,9 @@ const ButtonContainer = ({ animate }) =&gt; {
     }
 &nbsp;
     return (
-        &lt;View style={ styles.container } &gt;
-            &lt;TouchableOpacity style={ lowerButtonStyle } onPress={ <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleGuess('lower') </span>} &gt;&lt;Text style={ lowerButtonTextStyle } &gt;Lower&lt;/Text&gt;&lt;/TouchableOpacity&gt;
-            &lt;TouchableOpacity style={ higherButtonStyle } onPress={ () =&gt; handleGuess('higher') } &gt;&lt;Text style={ higherButtonTextStyle } &gt;Higher&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+        &lt;View style={styles.container} &gt;
+            &lt;TouchableOpacity style={lowerButtonStyle} onPress={() =&gt; handleGuess('lower')} testID="lower" &gt;&lt;Text style={lowerButtonTextStyle} &gt;Lower&lt;/Text&gt;&lt;/TouchableOpacity&gt;
+            &lt;TouchableOpacity style={higherButtonStyle} onPress={() =&gt; handleGuess('higher')} testID="higher" &gt;&lt;Text style={higherButtonTextStyle} &gt;Higher&lt;/Text&gt;&lt;/TouchableOpacity&gt;
         &lt;/View&gt;
     )
 };
@@ -268,7 +268,7 @@ export default ButtonContainer
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jan 24 2022 14:22:58 GMT+0000 (Greenwich Mean Time)
+                at Mon Jan 24 2022 16:51:57 GMT+0000 (Greenwich Mean Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

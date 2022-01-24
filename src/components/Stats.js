@@ -16,9 +16,9 @@ const Stats = () => {
 
     return (
         <View style={styles.container} >
-            <Stat statName={"High Score"} statNumber={highScore} />
-            <Stat statName={"Score"} statNumber={score} />
-            <Stat statName={"Last Card"} statNumber={lastCardNumber} icon={lastCard.suit} />
+            <Stat statName={"High Score"} statNumber={highScore} testID="highScore" acces />
+            <Stat statName={"Score"} statNumber={score} testID="score" />
+            <Stat statName={"Last Card"} statNumber={lastCardNumber} icon={lastCard.suit} testID="lastCard" />
         </View>
     )
 }

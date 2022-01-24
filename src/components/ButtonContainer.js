@@ -24,9 +24,9 @@ const ButtonContainer = ({ animate }) => {
     }
 
     return (
-        <View style={ styles.container } >
-            <TouchableOpacity style={ lowerButtonStyle } onPress={ () => handleGuess('lower') } ><Text style={ lowerButtonTextStyle } >Lower</Text></TouchableOpacity>
-            <TouchableOpacity style={ higherButtonStyle } onPress={ () => handleGuess('higher') } ><Text style={ higherButtonTextStyle } >Higher</Text></TouchableOpacity>
+        <View style={styles.container} >
+            <TouchableOpacity style={lowerButtonStyle} onPress={() => handleGuess('lower')} testID="lower" ><Text style={lowerButtonTextStyle} >Lower</Text></TouchableOpacity>
+            <TouchableOpacity style={higherButtonStyle} onPress={() => handleGuess('higher')} testID="higher" ><Text style={higherButtonTextStyle} >Higher</Text></TouchableOpacity>
         </View>
     )
 };

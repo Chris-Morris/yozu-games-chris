@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react-native';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store';
 
 // import SigninScreen from './SigninScreen';
-import { AuthContext } from '../../context/authContext';
 import ProfileScreen from './ProfileScreen';
 
 describe('Profile Screen', () => {
@@ -11,9 +12,9 @@ describe('Profile Screen', () => {
 
     beforeEach(() => {
         screen = render(
-            <AuthContext.Provider value={ {} }>
+            <Provider store={store}>
                 <ProfileScreen />
-            </AuthContext.Provider>
+            </Provider>
         )
     });
 

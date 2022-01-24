@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/12</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.18% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/11</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -146,30 +146,27 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,10 +174,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,34 +228,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
 &nbsp;
-const Card = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-    // Selectors
-    const currentCard = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >st</span>ate =&gt; <span class="cstat-no" title="statement not covered" >state.Play.currentCard)</span></span>
+const Card = ({ card, top, left }) =&gt; {
 &nbsp;
-    let color = <span class="cstat-no" title="statement not covered" >'red'</span>
-    const size = <span class="cstat-no" title="statement not covered" >30</span>
-<span class="cstat-no" title="statement not covered" >    if (currentCard) {</span>
-<span class="cstat-no" title="statement not covered" >        if (currentCard.suit == 'club' || currentCard.suit == 'spade') {</span>
-<span class="cstat-no" title="statement not covered" >            color = 'black';</span>
+    let color = 'red'
+    const size = 30
+    if (card) {
+        if (card.suit == 'club' || card.suit == 'spade') {
+            color = 'black';
         } else {
-<span class="cstat-no" title="statement not covered" >            color = 'red'</span>
+            color = 'red'
         };
     };
 &nbsp;
-    const dispatch = <span class="cstat-no" title="statement not covered" >useDispatch();</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
-        &lt;DropShadow style={styles.shadowProp} &gt;
+    return (
+        &lt;DropShadow style={[styles.shadowProp, { top: top, left: left }]} &gt;
             &lt;View style={styles.card} &gt;
-                &lt;View style={styles.topImage} &gt;&lt;Icon name={`cards-${currentCard.suit}`} color={color} size={size} /&gt;&lt;/View&gt;
-                &lt;View style={styles.numberContainer} &gt;&lt;Text testID='cardNumber' style={styles.number} &gt;{currentCard.number}&lt;/Text&gt;&lt;/View&gt;
-                &lt;View style={styles.bottomImage} &gt;&lt;Icon name={`cards-${currentCard.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /&gt;&lt;/View&gt;
+                &lt;View style={styles.topImage} &gt;&lt;Icon name={`cards-${card.suit}`} color={color} size={size} /&gt;&lt;/View&gt;
+                &lt;View style={styles.numberContainer} &gt;&lt;Text testID='cardNumber' style={styles.number} &gt;{card.number}&lt;/Text&gt;&lt;/View&gt;
+                &lt;View style={styles.bottomImage} &gt;&lt;Icon name={`cards-${card.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /&gt;&lt;/View&gt;
             &lt;/View&gt;
         &lt;/DropShadow &gt;
     )
@@ -266,11 +259,14 @@ const Card = <span class="fstat-no" title="function not covered" >()</span> =&gt
 &nbsp;
 const styles = StyleSheet.create({
     card: {
+        // position: 'absolute',
         height: 320,
         width: '70%',
         backgroundColor: 'rgb(249, 249, 249)',
         justifyContent: 'space-between',
         borderRadius: 8,
+        borderColor: '#D3D3D3',
+        borderWidth: 1
     },
     topImage: {
         flexDirection: 'row',
@@ -286,7 +282,7 @@ const styles = StyleSheet.create({
         fontSize: 50
     },
     number: {
-        fontSize: 100,
+        fontSize: 80,
         fontWeight: 'bold'
     },
     bottomImage: {
@@ -304,6 +300,7 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     shadowProp: {
+        position: 'absolute',
         shadowColor: '#171717',
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.4,
@@ -311,7 +308,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 25
+        marginTop: 10
     }
 })
 &nbsp;
@@ -322,7 +319,7 @@ export default Card</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jan 18 2022 16:29:18 GMT+0000 (Greenwich Mean Time)
+                at Mon Jan 24 2022 16:55:10 GMT+0000 (Greenwich Mean Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

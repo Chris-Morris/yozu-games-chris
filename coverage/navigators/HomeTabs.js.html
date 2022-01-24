@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -125,30 +125,30 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,31 +170,31 @@ import ProfileScreen from "../src/screens/Profile/ProfileScreen";
 &nbsp;
 const Tab = createBottomTabNavigator();
 &nbsp;
-const HomeTabs = () =&gt; {
-    return (
+const HomeTabs = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    return (</span>
         &lt;Tab.Navigator screenOptions={ { headerShown: false } } &gt;
             &lt;Tab.Screen name="Home" component={ HomeScreen } options={ {
                 tabBarLabel: 'GAMES',
-                tabBarIcon: ({ color, size }) =&gt; (
-                    &lt;Material name="dice-5-outline" color={ color } size={ size } /&gt;
+                tabBarIcon: <span class="fstat-no" title="function not covered" >({</span> color, size }) =&gt; (
+<span class="cstat-no" title="statement not covered" >                    &lt;Material name="dice-5-outline" color={ color } size={ size } /&gt;</span>
                 )
             } } /&gt;
             &lt;Tab.Screen name="Stats" component={ StatsScreen } options={ {
                 tabBarLabel: 'STATS',
-                tabBarIcon: ({ color, size }) =&gt; (
-                    &lt;Entypo name="text-document" color={ color } size={ size } /&gt;
+                tabBarIcon: <span class="fstat-no" title="function not covered" >({</span> color, size }) =&gt; (
+<span class="cstat-no" title="statement not covered" >                    &lt;Entypo name="text-document" color={ color } size={ size } /&gt;</span>
                 )
             } } /&gt;
             &lt;Tab.Screen name="Awards" component={ AwardsScreen } options={ {
                 tabBarLabel: 'AWARDS',
-                tabBarIcon: ({ color, size }) =&gt; (
-                    &lt;Material name="star-circle-outline" color={ color } size={ size } /&gt;
+                tabBarIcon: <span class="fstat-no" title="function not covered" >({</span> color, size }) =&gt; (
+<span class="cstat-no" title="statement not covered" >                    &lt;Material name="star-circle-outline" color={ color } size={ size } /&gt;</span>
                 )
             } } /&gt;
             &lt;Tab.Screen name="Profile" component={ ProfileScreen } options={ {
                 tabBarLabel: 'PROFILE',
-                tabBarIcon: ({ color, size }) =&gt; (
-                    &lt;Entypo name="heart-outlined" color={ color } size={ size } /&gt;
+                tabBarIcon: <span class="fstat-no" title="function not covered" >({</span> color, size }) =&gt; (
+<span class="cstat-no" title="statement not covered" >                    &lt;Entypo name="heart-outlined" color={ color } size={ size } /&gt;</span>
                 )
             } } /&gt;
         &lt;/Tab.Navigator&gt;
@@ -208,7 +208,7 @@ export default HomeTabs;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jan 24 2022 11:46:31 GMT+0000 (Greenwich Mean Time)
+                at Mon Jan 24 2022 15:32:21 GMT+0000 (Greenwich Mean Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

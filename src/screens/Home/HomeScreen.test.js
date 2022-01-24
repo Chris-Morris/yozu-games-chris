@@ -1,45 +1,28 @@
-import { render, fireEvent, cleanup, debug } from '@testing-library/react-native';
+import { render, fireEvent, cleanup } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import { store } from '../../redux/store';
-import HomeScreen from './HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
 import NavContainer from '../../../navigators/NavigationContainer';
 import GameStack from '../../../navigators/GameStack';
+import HomeScreen from './HomeScreen';
 
 describe('HomeScreen', () => {
 
-    test('navigates to Play Screen on press', async () => {
+    test('renders game buttons', () => {
         const home = (
             <Provider store={store}>
-                <NavContainer>
-                    <GameStack />
-                </NavContainer>
+                <NavigationContainer>
+                    <HomeScreen />
+                </NavigationContainer>
             </Provider>
         );
 
-        const { findByText, findByTestId, queryByText, queryByTestId, getByPlaceholderText } = render(home);
+        const { findByText } = render(home);
 
-        expect(queryByText(/start game/i)).toBeFalsy();
+        expect(findByText(/Higher or Lower/i)).toBeTruthy();
+        expect(findByText(/simon says/i)).toBeTruthy();
+        expect(findByText(/memory/i)).toBeTruthy();
+        expect(findByText(/countdown letters/i)).toBeTruthy();
 
-        expect(queryByText(/Higher or Lower/i)).toBeFalsy();
-
-        // Arrange and Act
-        const username = getByPlaceholderText('Username');
-        fireEvent.changeText(username, 'chris')
-        const password = getByPlaceholderText('Password');
-        fireEvent.changeText(password, 'password');
-        const enabledSubmitButton = queryByTestId('enabledButton');
-
-        fireEvent.press(enabledSubmitButton);
-
-        const game = await findByTestId('higherOrLower');
-        // console.log(game);
-
-        expect(game).toBeTruthy();
-
-        fireEvent.press(game);
-
-        // const startGame = await findByText(/start game/i);
-
-        // expect(startGame).toBeTruthy();
     });
 });
