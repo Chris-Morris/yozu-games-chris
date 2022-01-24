@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         position: 'absolute',
+        width: '80%',
         top: 10,
-        left: 50,
+        left: 40,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        alignSelf: 'stretch',
-        paddingHorizontal: 30
+        alignSelf: 'stretch'
     },
     text: {
         color: 'white'

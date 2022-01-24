@@ -1,27 +1,33 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react-native';
 import { Alert } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store';
+import NavContainer from '../../../navigators/NavigationContainer';
 
 import SigninScreen from './SigninScreen';
-import { AuthContext } from '../../context/authContext';
 
 describe('Sign In Screen', () => {
 
     let screen;
-
     beforeEach(() => {
-        screen = render(
-            <AuthContext.Provider value={{}}>
-                <SigninScreen />
-            </AuthContext.Provider>
-        )
+        screen = (
+            <Provider store={store}>
+                <NavigationContainer>
+                    <SigninScreen />
+                </NavigationContainer>
+            </Provider>
+        );
+
+        return { getByText, getByTestId, queryByTestId, queryAllByTestId, getByPlaceholderText, debug } = render(screen);
     });
 
     afterEach(cleanup);
 
     test('renders username input', () => {
         // Arrange
-        const usernameInput = screen.getByPlaceholderText('Username');
+        const usernameInput = getByPlaceholderText('Username');
 
         // Assert
         expect(usernameInput).toBeDefined();
@@ -29,7 +35,7 @@ describe('Sign In Screen', () => {
 
     test('renders password input', () => {
         // Arrange
-        const passwordInput = screen.getByPlaceholderText('Password');
+        const passwordInput = getByPlaceholderText('Password');
 
         // Assert
         expect(passwordInput).toBeDefined();
@@ -37,26 +43,26 @@ describe('Sign In Screen', () => {
 
     test("renders username input box with invalid style when less than 5 characters entered", () => {
         // Arrange
-        const username = screen.getByPlaceholderText('Username');
+        const username = getByPlaceholderText('Username');
         fireEvent.changeText(username, 'chri')
 
         // Assert
-        expect(username.props.style.borderColor).toBe('rgb(255, 2, 2)');
+        expect(username.props.style[1].borderColor).toBe('rgb(255, 2, 2)');
     });
 
     test("renders password input box with invalid style when less than 5 characters entered", () => {
         // Arrange
-        const password = screen.getByPlaceholderText('Password');
+        const password = getByPlaceholderText('Password');
         fireEvent.changeText(password, 'pass');
 
         // Assert
-        expect(password.props.style.borderColor).toBe('rgb(255, 2, 2)');
+        expect(password.props.style[1].borderColor).toBe('rgb(255, 2, 2)');
     });
 
     test("renders disabled button until inputs verified, doesn't render enabled button", () => {
         // Arrange
-        const disabledSubmitButton = screen.getByTestId('disabledButton');
-        const enabledSubmitButton = screen.queryByTestId('enabledButton');
+        const disabledSubmitButton = getByTestId('disabledButton');
+        const enabledSubmitButton = queryByTestId('enabledButton');
 
         // Assert
         expect(disabledSubmitButton).toBeTruthy();
@@ -65,12 +71,12 @@ describe('Sign In Screen', () => {
 
     test("renders enabled button until inputs verified, doesn't render disabled button", () => {
         // Arrange and Act
-        const username = screen.getByPlaceholderText('Username');
+        const username = getByPlaceholderText('Username');
         fireEvent.changeText(username, 'chris')
-        const password = screen.getByPlaceholderText('Password');
+        const password = getByPlaceholderText('Password');
         fireEvent.changeText(password, 'password');
-        const disabledSubmitButton = screen.queryByTestId('disabledButton');
-        const enabledSubmitButton = screen.queryByTestId('enabledButton');
+        const disabledSubmitButton = queryByTestId('disabledButton');
+        const enabledSubmitButton = queryByTestId('enabledButton');
 
         // Assert
         expect(disabledSubmitButton).toBeFalsy();
@@ -79,7 +85,7 @@ describe('Sign In Screen', () => {
 
     test('shows alert when sign in button is pressed when invalid details are present', () => {
         // Arrange
-        const disabledButton = screen.getByTestId('disabledButton');
+        const disabledButton = getByTestId('disabledButton');
         jest.spyOn(Alert, 'alert');
 
         // Act
@@ -87,5 +93,30 @@ describe('Sign In Screen', () => {
 
         // Assert
         expect(Alert.alert).toHaveBeenCalledTimes(1);
+    });
+
+    test('navigates to Home Screen on Sign In', async () => {
+        const nav = (
+            <Provider store={store}>
+                <NavContainer />
+            </Provider>
+        );
+
+        const { findByText, queryByText } = render(nav);
+
+        expect(queryByText(/Higher or Lower/i)).toBeFalsy();
+
+        // Arrange and Act
+        const username = getByPlaceholderText('Username');
+        fireEvent.changeText(username, 'chris')
+        const password = getByPlaceholderText('Password');
+        fireEvent.changeText(password, 'password');
+        const enabledSubmitButton = queryByTestId('enabledButton');
+
+        fireEvent.press(enabledSubmitButton);
+
+        const game = await findByText(/Higher or Lower/i);
+
+        expect(game).toBeTruthy();
     });
 });

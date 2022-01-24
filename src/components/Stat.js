@@ -6,17 +6,17 @@ const Stat = ({ statName, statNumber, icon }) => {
 
     return (
         icon ? (
-            <View style={ styles.statContainer } >
-                <Text style={ styles.statName } >{ statName }</Text>
-                <View style={ styles.withIcon } >
-                    <Text style={ styles.statName } >{ statNumber }</Text>
-                    <Icon name={ `cards-${icon}` } style={ styles.statIcon } />
+            <View style={styles.statContainer} >
+                <Text style={styles.statName} >{statName}</Text>
+                <View style={styles.withIcon} >
+                    <Text style={styles.statName} >{statNumber}</Text>
+                    <Icon name={`cards-${icon}`} style={styles.statIcon} />
                 </View>
             </View >
         ) : (
-            <View style={ styles.statContainer } >
-                <Text style={ styles.statName } >{ statName }</Text>
-                <Text style={ styles.statName } >{ statNumber }</Text>
+            <View style={styles.statContainer} >
+                <Text style={styles.statName} >{statName}</Text>
+                <Text style={styles.statName} >{statNumber}</Text>
             </View>
         )
     )
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
     },
     withIcon: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
-        width: 40
+        width: 60
     }
 })
 

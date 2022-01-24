@@ -68,15 +68,15 @@ const HomeScreenAnimated = ({ navigation }) => {
     );
 
     return (
-        <View style={ styles.container }>
-            <View style={ styles.yozuContainer } >
+        <View style={styles.container}>
+            <View style={styles.yozuContainer} >
                 <YozuGames />
             </View>
-            <View style={ styles.gameContainer } >
-                <Animated.View style={ { transform: [{ translateY: animatedBox1 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.higherLower] } onPress={ () => navigation.navigate('Play') } ><Text style={ styles.buttonText } >Higher or Lower</Text></TouchableOpacity></Animated.View>
-                <Animated.View style={ { transform: [{ translateY: animatedBox2 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.simonSays] } onPress={ () => alert('Sorry, Simon Says is currently in development.') } ><Text style={ styles.buttonText } >Simon Says</Text></TouchableOpacity></Animated.View>
-                <Animated.View style={ { transform: [{ translateY: animatedBox3 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.memory] } onPress={ () => alert('Sorry, Memory is currently in development.') } ><Text style={ styles.buttonText } >Memory</Text></TouchableOpacity></Animated.View>
-                <Animated.View style={ { transform: [{ translateY: animatedBox4 }] } } ><TouchableOpacity style={ [styles.gameButton, styles.countdownLetters] } onPress={ () => alert('Sorry, Countdown Letters is currently in development.') } ><Text style={ styles.buttonText } >Countdown Letters</Text></TouchableOpacity></Animated.View>
+            <View style={styles.gameContainer} >
+                <Animated.View style={{ transform: [{ translateY: animatedBox1 }] }} ><TouchableOpacity style={[styles.gameButton, styles.higherLower]} testID='higherOrLower' onPress={() => navigation.navigate('Play')} ><Text style={styles.buttonText} >Higher or Lower</Text></TouchableOpacity></Animated.View>
+                <Animated.View style={{ transform: [{ translateY: animatedBox2 }] }} ><TouchableOpacity style={[styles.gameButton, styles.simonSays]} onPress={() => alert('Sorry, Simon Says is currently in development.')} ><Text style={styles.buttonText} >Simon Says</Text></TouchableOpacity></Animated.View>
+                <Animated.View style={{ transform: [{ translateY: animatedBox3 }] }} ><TouchableOpacity style={[styles.gameButton, styles.memory]} onPress={() => alert('Sorry, Memory is currently in development.')} ><Text style={styles.buttonText} >Memory</Text></TouchableOpacity></Animated.View>
+                <Animated.View style={{ transform: [{ translateY: animatedBox4 }] }} ><TouchableOpacity style={[styles.gameButton, styles.countdownLetters]} onPress={() => alert('Sorry, Countdown Letters is currently in development.')} ><Text style={styles.buttonText} >Countdown Letters</Text></TouchableOpacity></Animated.View>
             </View>
         </View>
     )

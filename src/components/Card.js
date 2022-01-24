@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropShadow from "react-native-drop-shadow";
 
-const Card = ({ card }) => {
+const Card = ({ card, top }) => {
 
     let color = 'red'
     const size = 30
@@ -16,11 +16,11 @@ const Card = ({ card }) => {
     };
 
     return (
-        <DropShadow style={ styles.shadowProp } >
-            <View style={ styles.card } >
-                <View style={ styles.topImage } ><Icon name={ `cards-${card.suit}` } color={ color } size={ size } /></View>
-                <View style={ styles.numberContainer } ><Text testID='cardNumber' style={ styles.number } >{ card.number }</Text></View>
-                <View style={ styles.bottomImage } ><Icon name={ `cards-${card.suit}` } color={ color } size={ size } style={ { transform: [{ rotateX: '180deg' }] } } /></View>
+        <DropShadow style={[styles.shadowProp, { top: top }]} >
+            <View style={styles.card} >
+                <View style={styles.topImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} /></View>
+                <View style={styles.numberContainer} ><Text testID='cardNumber' style={styles.number} >{card.number}</Text></View>
+                <View style={styles.bottomImage} ><Icon name={`cards-${card.suit}`} color={color} size={size} style={{ transform: [{ rotateX: '180deg' }] }} /></View>
             </View>
         </DropShadow >
     )
@@ -28,14 +28,14 @@ const Card = ({ card }) => {
 
 const styles = StyleSheet.create({
     card: {
-        position: 'absolute',
+        // position: 'absolute',
         height: 320,
         width: '70%',
         backgroundColor: 'rgb(249, 249, 249)',
         justifyContent: 'space-between',
         borderRadius: 8,
-        borderTopColor: '#D3D3D3',
-        borderTopWidth: 1
+        borderColor: '#D3D3D3',
+        borderWidth: 1
     },
     topImage: {
         flexDirection: 'row',
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     shadowProp: {
+        position: 'absolute',
         shadowColor: '#171717',
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.4,
